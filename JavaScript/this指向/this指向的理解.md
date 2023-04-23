@@ -118,4 +118,4 @@ console.log(newObj.myName); // 张六
 4. 如果函数没有返回其他对象，那么new 表达式中的函数调用会自动返回这个对象。
 
 #### this绑定的优先级
-new 构造调用 > call 绑定 > 对象调用 > 默认的全局变量
+new 构造调用 > call、apply、bind 绑定 > 对象调用 > 默认的全局变量
