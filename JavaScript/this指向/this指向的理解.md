@@ -36,6 +36,7 @@ var bar = {
 
 ### JavaScript中的this是什么？
 this是和执行上下文绑定的,每个执行上下文都有一个this.
+
 ![执行上下文](./images/execution-context.png)
 
 执行上下文主要分为三种——全局执行上下文、函数执行上下文和eval执行上下文,所以对应的this也只有这三种——全局执行上下文中的this、函数中的this和eval中的this.
