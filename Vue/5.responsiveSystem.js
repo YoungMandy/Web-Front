@@ -466,4 +466,81 @@ function trigger (target, key) {
 // 这样我们就能避免无限递归执行，从而避免栈溢出
 
 
+// 可调度性是响应系统飞擦灰姑娘重要的特性。首先我们需要明确什么是可调度性。所谓可调度，指的是当trigger 动作触发副作用函数重新执行时，有能力决定副作用函数执行的实际、次数以及方式。
+
+// 我们可以为effect函数设计一个选项参数options,允许用户指定调度器:
+// 在调用的时候
+effect(
+  () => {
+    console.log(obj.foo);
+  },
+  //options
+  {
+    scheduler (fn) {
+      
+    }
+  }
+)
+
+// 定义effect函数
+function effect (fn, options = {}) {
+  const effectFn = () => {
+    cleanup(effectFn);
+
+    // 当调用effect注册副作用函数时，将副作用函数赋值给activeEffect
+    activeEffect = effectFn;
+
+    // 在调用副作用函数之前将当前的副作用函数压栈
+    effectStack.push(activeEffect);
+    fn();
+
+    // 在当前副作用函数执行完毕后，将当前副作用函数弹出栈，并把activeEffect还原为之前的值
+    effectStack.pop();
+
+    activeEffect = effectStack[effectStack.length - 1];
+  }
+
+  // 将options 挂载到effectFn上
+  effectFn.options = options;
+  effectFn.deps = [];
+  effectFn();
+}
+
+// 有了调度函数，我们在trigger函数中触发副作用函数重新执行时，就可以直接调用用户传递的调度器函数，从而把控制权交给用户
+
+function trigger (target, key) {
+  const depsMap = bucket.get(target);
+  if (!depsMap) return;
+
+  const effects = depsMap.get(key);
+
+  const effectsToRun = new Set();
+
+  effects && effects.forEach(effectFn => {
+    if (effectFn !== activeEffect) {
+      effectsToRun.add(effectFn);
+    }
+  })
+
+  effectsToRun.forEach(effectFn => { 
+    if (effectFn.options.scheduler) {
+      // 如果一个副作用函数存在调度器，则调用调度器，并将副作用函数作为参数传递
+      effectFn.options.scheduler(effectFn);
+    }else {
+      effectFn();// 新增
+    }
+  })
+}
+
+
+// 通过调度器控制它的执行次数
+// 定义一个任务队列
+const jobQueue = new Set();
+
+// 使用Promise.resolve()创建一个Promise实例，我们用它将一个任务添加到任务队列
+const p = Promise.resolve();
+
+// 一个标志代表是否正在刷新队列let
+
+
 
