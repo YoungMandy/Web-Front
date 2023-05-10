@@ -77,3 +77,16 @@ let employeeName = buildName('Joseph', 'Samuel', 'Lucas', 'MacKinzie');
 // let x = { a: 1, b: 2, c: 3, d: 4 };
 // getProperty(x, a);
 // getProperty(x, m);
+
+ enum NumericEnum  {
+  grey = 'GREY',
+  blue = 'BLUE',
+  pink = 'PINK',
+}
+
+type A = keyof Record<NumericEnum, number>;
+
+interface T {
+  hello: string;
+  jjjj: number;
+}
