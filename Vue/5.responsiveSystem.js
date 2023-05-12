@@ -655,6 +655,7 @@ function flushJob () {
   isFlushing = true;
 
   // 在微任务队列中刷新jobQueue队列
+  //promise.then()还会返回一个promise
   p.then(() => {
     jobQueue.forEach(job => job());
   }).finally(() => {
