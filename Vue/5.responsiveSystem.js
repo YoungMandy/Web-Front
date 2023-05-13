@@ -541,137 +541,131 @@
 // 解决方案: effect的注册函数支持传递一个option对象，传递一个函数进来控制顺序，需要在trigger函数里面做一点小改动
 
 // 第七版：支持配置调度顺序
-const bucket = new WeakMap();
-let activeEffect;
-const effectStack = [];
+// const bucket = new WeakMap();
+// let activeEffect;
+// const effectStack = [];
 
-const data = { num: 0, foo: 0, bar: 0 };
+// const data = { num: 0, foo: 0, bar: 0 };
 
-const obj = new Proxy(data, {
-  get (target, key) {
-    // 收集依赖这些属性的函数
-    track(target, key);
-    return target[key];
-  },
-  set (target, key, value) { 
-    target[key] = value;
-    // 触发副作用函数的重新执行
-    trigger(target, key);
-  }
-})
-
-// 收集依赖该对象属性的副作用函数
-function track (target, key) { 
-  if (!activeEffect) return;
-
-  let depsMap = bucket.get(target);
-
-  if (!depsMap) {
-    bucket.set(target, (depsMap = new Map()));
-  }
-
-  let deps = depsMap.get(key);
-  if (!deps) {
-    depsMap.set(key, (deps = new Set()));
-  }
-
-  deps.add(activeEffect)
-  activeEffect.deps.push(deps);
-}
-
-// 数据改变触发副作用函数的重新执行
-function trigger (target, key) { 
-  const depsMap = bucket.get(target);
-  if (!depsMap) return;
-
-  effects = depsMap.get(key);
-
-  const effectsToRun = new Set();
-
-  effects && effects.forEach(effect => {
-    if (effect !== activeEffect) {
-      effectsToRun.add(effect);
-    }
-  });
-
-  effectsToRun.forEach(effectFn => {
-    if (effectFn.options.scheduler) {
-      effectFn.options.scheduler(effectFn);
-    } else {
-      effectFn();
-    }
-  })
-}
-
-function cleanup (effectFn) {
-  for (let i = 0; i < effectFn.deps.length; i++) { 
-    const effectSet = effectFn.deps[i];
-    effectSet.delete(effectFn);
-  }
-  effectFn.deps.length = 0;
-}
-
-function effect (fn, options = {}) {
-  const effectFn = () => {
-    cleanup(effectFn);
-    activeEffect = effectFn;
-
-    effectStack.push(effectFn);
-    fn();
-    effectStack.pop();
-    activeEffect = effectStack[effectStack.length - 1];
-  }
-
-  effectFn.deps = [];
-  effectFn.options = options;
-  effectFn();
-}
-
-// effect(() => {
-//   console.log(obj.num);
-// }, {
-//   scheduler (fn) {
-//     setTimeout(fn)
+// const obj = new Proxy(data, {
+//   get (target, key) {
+//     // 收集依赖这些属性的函数
+//     track(target, key);
+//     return target[key];
+//   },
+//   set (target, key, value) { 
+//     target[key] = value;
+//     // 触发副作用函数的重新执行
+//     trigger(target, key);
 //   }
 // })
 
+// // 收集依赖该对象属性的副作用函数
+// function track (target, key) { 
+//   if (!activeEffect) return;
+
+//   let depsMap = bucket.get(target);
+
+//   if (!depsMap) {
+//     bucket.set(target, (depsMap = new Map()));
+//   }
+
+//   let deps = depsMap.get(key);
+//   if (!deps) {
+//     depsMap.set(key, (deps = new Set()));
+//   }
+
+//   deps.add(activeEffect)
+//   activeEffect.deps.push(deps);
+// }
+
+// // 数据改变触发副作用函数的重新执行
+// function trigger (target, key) { 
+//   const depsMap = bucket.get(target);
+//   if (!depsMap) return;
+
+//   effects = depsMap.get(key);
+
+//   const effectsToRun = new Set();
+
+//   effects && effects.forEach(effect => {
+//     if (effect !== activeEffect) {
+//       effectsToRun.add(effect);
+//     }
+//   });
+
+//   effectsToRun.forEach(effectFn => {
+//     if (effectFn.options.scheduler) {
+//       effectFn.options.scheduler(effectFn);
+//     } else {
+//       effectFn();
+//     }
+//   })
+// }
+
+// function cleanup (effectFn) {
+//   for (let i = 0; i < effectFn.deps.length; i++) { 
+//     const effectSet = effectFn.deps[i];
+//     effectSet.delete(effectFn);
+//   }
+//   effectFn.deps.length = 0;
+// }
+
+// function effect (fn, options = {}) {
+//   const effectFn = () => {
+//     cleanup(effectFn);
+//     activeEffect = effectFn;
+
+//     effectStack.push(effectFn);
+//     fn();
+//     effectStack.pop();
+//     activeEffect = effectStack[effectStack.length - 1];
+//   }
+
+//   effectFn.deps = [];
+//   effectFn.options = options;
+//   effectFn();
+// }
+
+// // effect(() => {
+// //   console.log(obj.num);
+// // }, {
+// //   scheduler (fn) {
+// //     setTimeout(fn)
+// //   }
+// // })
+
+// // obj.num++;
+// // console.log("结束了");
+
+// // 定义一个任务队列
+// const jobQueue = new Set();
+
+// let flushing = false;
+// const p = Promise.resolve();
+
+// function flushJob () {
+//   if (flushing) return;
+//   flushing = true;
+//   p.then(() => {
+//     jobQueue.forEach(fn =>fn())
+//   }).finally(() => {
+//     flushing = false;
+//     jobQueue.clear();
+//   })
+// }
+// effect(() => {
+//   console.log(obj.num)
+// }, {
+//   scheduler (fn) {
+//     // 每次调度时，将副作用函数添加到jobQueue队列中
+//     jobQueue.add(fn);
+//     //调用flushJob刷新队列
+//     flushJob();
+//   }
+// })
 // obj.num++;
-// console.log("结束了");
 
-// 定义一个任务队列
-const jobQueue = new Set();
+// obj.num++;
 
-// 使用Promise.resolve() 创建一个promise实例，我们用它把一个任务加到微任务队列里
-
-const p = Promise.resolve();
-
-// 一个标志代表是否正在刷新队列
-let isFlushing = false;
-function flushJob () {
-  // 如果队列正在刷新，则什么都不做
-  if (isFlushing) return;
-
-  // 设置为true,代表正在刷新
-  isFlushing = true;
-
-  // 在微任务队列中刷新jobQueue队列
-  //promise.then()还会返回一个promise
-  p.then(() => {
-    jobQueue.forEach(job => job());
-  }).finally(() => {
-    // 结束后重置isFlushing
-    isFlushing = false;
-  })
-}
-effect(() => {
-  console.log(obj.num)
-}, {
-  scheduler (fn) {
-    // 每次调度时，将副作用函数添加到jobQueue队列中
-    jobQueue.add(fn);
-    //调用flushJob刷新队列
-    flushJob();
-  }
-})
-obj.num++;
-obj.num++;
+// 第八版:增加computed 和lazy
