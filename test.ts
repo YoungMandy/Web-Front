@@ -14,7 +14,7 @@ function convertTemperature (temperature: number, type: string): number {
   }
   if (!(type in typeMap)) {
     throw new Error(
-      'Parameter error, please enter the correct temperature unit (F or C)'
+      "Parameter error, please enter the correct temperature unit ('F' or 'C')"
     );
   }
 
@@ -23,7 +23,7 @@ function convertTemperature (temperature: number, type: string): number {
   return res;
 }
 
-convertTemperature(32, 'F'); // 输出: 0
+convertTemperature(32, 'Y'); // 输出: 0
 convertTemperature(100, 'C'); // 输出: 212
 
 function groupArrayElements(array:Array<number>, n:number):Array<Array<number>> {

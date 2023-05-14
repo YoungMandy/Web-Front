@@ -931,3 +931,13 @@ effect(() => {
 });
 
 // watch的本质: 观测一个响应式数据，当数据发生变化时通知
+function watch (source, cb) {
+  effect(() => {
+    // 触发读操作，从而建立联系
+    () => source.foo;
+  }, {
+    scheduler () {
+      cb()
+    }
+  })
+}
