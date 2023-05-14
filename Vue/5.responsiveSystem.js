@@ -669,3 +669,134 @@
 // obj.num++;
 
 // 第八版:增加computed 和lazy
+const bucket = new WeakMap();
+let activeEffect;
+const effectStack = [];// 类似于调用栈
+
+const data = { num: 0, foo: 1, bar: 2 };
+const obj = new Proxy(data, {
+  get (target, key) {
+    // 收集那些地方依赖了这些数据
+    track(target, key);
+    return target[key];
+  },
+  set (target, key, value) { 
+    target[key] = value;
+    // 触发副作用函数的重新执行
+    trigger(target, key);
+  }
+})
+
+function track (target, key) { 
+  if (!activeEffect) return;//没有依赖的副作用函数，就不需要收集
+  let depsMap = bucket.get(target);
+
+  if (!depsMap) {
+    bucket.set(target, (depsMap = new Map()));
+  }
+
+  let deps = depsMap.get(key);
+  if (!deps) {
+    depsMap.set(key, (deps = new Set()));
+  }
+
+  deps.add(activeEffect);
+
+  activeEffect.deps.push(deps);
+}
+
+// 数据改变，触发副作用函数的重新执行
+function trigger (target, key) {
+  const depsMap = bucket.get(target);
+
+  if (!depsMap) return;
+  const effects = depsMap.get(key);
+
+  const effectsToRun = new Set();
+
+  effects && effects.forEach(effect => {
+    if (effect !== activeEffect) {
+      effectsToRun.add(effect);
+    }
+  })
+  effectsToRun.forEach(effectFn => {
+    if (effectFn?.options?.scheduler) {
+      effectFn.options.scheduler(effectFn);
+    } else {
+      effectFn();
+    }
+  })
+}
+
+// 执行副作用函数前先清除副作用函数和数据之前关联。在执行副作用函数用到数据时会重新关联上
+function cleanup (effectFn) {
+  for (let i = 0; i < effectFn.deps.length; i++) { 
+    const effectSet = effectFn.deps[i];
+    effectSet.delete(effectFn);// 防止内存泄露
+  }
+
+  effectFn.deps.length = 0;
+}
+
+
+// 注册副作用函数
+function effect (fn, options = {}) {
+  
+  
+  const effectFn = () => {
+    cleanup(effectFn);
+    activeEffect = effectFn;
+
+    effectStack.push(effectFn);
+    const res = fn();
+
+    effectStack.pop();
+    activeEffect = effectStack[effectStack.length - 1];
+    
+    return res;
+  }
+
+  effectFn.options = options || {};
+  effectFn.deps = [];
+
+  if (!options?.lazy) {
+    effectFn();
+  }
+
+  return effectFn;
+
+}
+
+function computed (getter) {
+  let value;
+  let dirty = true;// 数据脏的时候需要刷新
+  const effectFn = effect(getter, {
+    lazy: true,
+    scheduler: () => {
+      if (!dirty) {
+        dirty = true;
+        trigger(obj, 'value');
+      }
+    }
+  });
+
+  const obj = {
+    get value () {
+      if (dirty) { 
+        value = effectFn();
+        dirty = false;
+      }
+      track(obj, 'value');
+      return value;
+    }
+  }
+
+  return obj;
+}
+
+
+const sumRes = computed(() => obj.foo + obj.bar);
+console.log(sumRes.value)
+effect(() => {
+  console.log("计算属性的改变", sumRes.value);
+})
