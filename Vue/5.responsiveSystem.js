@@ -898,96 +898,248 @@ function effect(fn, options = {}) {
   return effectFn;
 }
 
-function computed(getter) {
+// function computed(getter) {
+//   let value;
+//   let dirty = true; // 数据脏的时候需要刷新
+//   const effectFn = effect(getter, {
+//     lazy: true,
+//     scheduler: () => {
+//       if (!dirty) {
+//         dirty = true;
+//         trigger(obj, 'value');
+//       }
+//     },
+//   });
+
+//   const obj = {
+//     get value() {
+//       if (dirty) {
+//         value = effectFn();
+//         dirty = false;
+//       }
+//       track(obj, 'value');
+//       return value;
+//     },
+//   };
+
+//   return obj;
+// }
+
+// const sumRes = computed(() => obj.foo + obj.bar);
+// console.log(sumRes.value);
+// effect(() => {
+//   console.log('计算属性的改变', sumRes.value);
+// });
+
+// // watch的本质: 观测一个响应式数据，当数据发生变化时通知
+// function watch (source, cb, options = {}) {
+//   let getter;
+
+//   // 如果source是函数，说明用户传递的事getter,所以直接把source赋值给getter
+//   if (typeof source === 'function') {
+//     getter = source;
+//   } else {
+//     getter = () => traverse(source);
+//   }
+//   let oldValue, newValue;
+//   // 使用effect注册副作用函数时，开启lazy选项，并把返回值存储到effectFn中方便后续调用
+
+//   // 提取scheduler调度函数为一个独立的job函数
+//   const job = () => {
+//     newValue = effectFn();
+//     cb(newValue, oldValue);
+//     oldValue = newValue;
+//   }
+
+//   const effectFn = effect(
+//     () => getter(),
+//     {
+//       lazy: true,
+//       scheduler: () => {
+//         // 在调度函数中判断flush是否为’post'，如果是,将其放到微任务列中执行
+//         if (options.flush === 'post') {
+//           const p = Promise.resolve();
+//           p.then(job);
+//         } else {
+//           job();
+//         }
+//       }
+//     }
+//   )
+
+//   if (options.immediate) {
+//     job();
+//   } else {
+//     oldValue = effectFn();
+//   }
+ 
+// }
+
+// watch(obj, () => {
+//   console.log("数据变化了");
+// })
+
+// function traverse (value, seen = new Set()) {
+//   // 如果要读取的数据是原始值，或者已经被读取过了，那么什么都不做
+//   if (typeof value !== 'object' || value === null || seen.has(value)) return;
+
+//   //将数据添加到seen中，代表遍历地读取过了，避免循环引用引起的死循环
+//   seen.add(value);
+
+//   for (const k in value) {
+//     traverse(value[k], seen);
+//   }
+//   return value;
+// }
+
+// 实现computed
+function computed (getter) {
   let value;
-  let dirty = true; // 数据脏的时候需要刷新
-  const effectFn = effect(getter, {
-    lazy: true,
-    scheduler: () => {
-      if (!dirty) {
-        dirty = true;
+  let dirty = true;
+  const effectFn = effect(
+    getter,
+    {
+      lazy: true,
+      scheduler () {
+        if (!dirty) {
+          dirty = true;
+        }
         trigger(obj, 'value');
       }
-    },
-  });
+    }
+  );
 
   const obj = {
-    get value() {
+    get value () {
       if (dirty) {
         value = effectFn();
         dirty = false;
+        
       }
       track(obj, 'value');
       return value;
-    },
-  };
+    }
+  }
 
   return obj;
 }
 
-const sumRes = computed(() => obj.foo + obj.bar);
-console.log(sumRes.value);
-effect(() => {
-  console.log('计算属性的改变', sumRes.value);
-});
+const test = computed(() => obj.foo + obj.bar);
 
-// watch的本质: 观测一个响应式数据，当数据发生变化时通知
+const watchComputed = effect(() => console.log('我在监听计算属性的变化:', test.value));
+
 function watch (source, cb, options = {}) {
-  let getter;
 
-  // 如果source是函数，说明用户传递的事getter,所以直接把source赋值给getter
+  let newValue, oldValue;
+  let getter;
   if (typeof source === 'function') {
     getter = source;
   } else {
     getter = () => traverse(source);
   }
-  let oldValue, newValue;
-  // 使用effect注册副作用函数时，开启lazy选项，并把返回值存储到effectFn中方便后续调用
 
-  // 提取scheduler调度函数为一个独立的job函数
-  const job = () => {
+  let cleanup;
+  function onInvalidate (fn) {
+    cleanup = fn;
+  }
+
+  function job () {
     newValue = effectFn();
-    cb(newValue, oldValue);
+    if (cleanup) {
+      debugger
+      cleanup();
+    }
+    cb(newValue, oldValue,onInvalidate);
     oldValue = newValue;
   }
 
   const effectFn = effect(
     () => getter(),
     {
-      lazy: true,
+    lazy:true,
       scheduler: () => {
-        // 在调度函数中判断flush是否为’post'，如果是,将其放到微任务列中执行
         if (options.flush === 'post') {
           const p = Promise.resolve();
           p.then(job);
         } else {
-          job();
+          job
         }
       }
-    }
-  )
-
+    })
+  
   if (options.immediate) {
+    // 当immediate为true立即执行job,从而触发回调执行
     job();
   } else {
     oldValue = effectFn();
   }
- 
+  
+  // 手动调用副作用函数，拿到的值就是旧值
+  // 这里的手动执行相当于初始化，只是为了收集依赖，并不是watch的callback
+  oldValue = effectFn();
 }
 
-watch(obj, () => {
-  console.log("数据变化了");
-})
-
 function traverse (value, seen = new Set()) {
-  // 如果要读取的数据是原始值，或者已经被读取过了，那么什么都不做
-  if (typeof value !== 'object' || value === null || seen.has(value)) return;
-
-  //将数据添加到seen中，代表遍历地读取过了，避免循环引用引起的死循环
+  if (typeof value !== 'object' || value === null || !seen.has(value)) return;
+  
   seen.add(value);
-
-  for (const k in value) {
-    traverse(value[k], seen);
+  if (Array.isArray(value)) {
+    for (let v of value) {
+      traverse(v, seen);
+    }
+  } else {
+    for (let k in value) {
+      traverse(value[k], seen);
+    }
   }
   return value;
 }
+
+watch(
+  obj,
+  async (newValue, oldValue, onInvalidate) => {
+    debugger;
+    let expired = false;
+
+    onInvalidate(() => {
+      debugger;
+      expired = true;
+    });
+
+    const res = await 1;
+
+    if (!expired) {
+      debugger;
+      finalData = res;
+    }
+  },
+  { immediate: true, flush :'post'}
+);
+
+// 第一次修改
+obj.foo++;
+setTimeout(() => {
+  obj.foo++
+}, 200)
+
+
+function foo() {
+  var myName = '极客时间';
+  let test1 = 1;
+  const test2 = 2;
+  var innerBar = {
+    getName: function() {
+      debugger
+      console.log(test1);
+      return myName;
+    },
+    setName: function (newName) {
+      myName = newName;
+    },
+  };
+  return innerBar;
+}
+var bar = foo();
+bar.setName('极客邦');
+bar.getName();
+console.log(bar.getName());
