@@ -807,6 +807,7 @@ let activeEffect;
 const effectStack = []; // 类似于调用栈
 
 const data = { num: 0, foo: 1, bar: 2 };
+
 const obj = new Proxy(data, {
   get(target, key) {
     // 收集那些地方依赖了这些数据
@@ -931,13 +932,62 @@ effect(() => {
 });
 
 // watch的本质: 观测一个响应式数据，当数据发生变化时通知
-function watch (source, cb) {
-  effect(() => {
-    // 触发读操作，从而建立联系
-    () => source.foo;
-  }, {
-    scheduler () {
-      cb()
+function watch (source, cb, options = {}) {
+  let getter;
+
+  // 如果source是函数，说明用户传递的事getter,所以直接把source赋值给getter
+  if (typeof source === 'function') {
+    getter = source;
+  } else {
+    getter = () => traverse(source);
+  }
+  let oldValue, newValue;
+  // 使用effect注册副作用函数时，开启lazy选项，并把返回值存储到effectFn中方便后续调用
+
+  // 提取scheduler调度函数为一个独立的job函数
+  const job = () => {
+    newValue = effectFn();
+    cb(newValue, oldValue);
+    oldValue = newValue;
+  }
+
+  const effectFn = effect(
+    () => getter(),
+    {
+      lazy: true,
+      scheduler: () => {
+        // 在调度函数中判断flush是否为’post'，如果是,将其放到微任务列中执行
+        if (options.flush === 'post') {
+          const p = Promise.resolve();
+          p.then(job);
+        } else {
+          job();
+        }
+      }
     }
-  })
+  )
+
+  if (options.immediate) {
+    job();
+  } else {
+    oldValue = effectFn();
+  }
+ 
+}
+
+watch(obj, () => {
+  console.log("数据变化了");
+})
+
+function traverse (value, seen = new Set()) {
+  // 如果要读取的数据是原始值，或者已经被读取过了，那么什么都不做
+  if (typeof value !== 'object' || value === null || seen.has(value)) return;
+
+  //将数据添加到seen中，代表遍历地读取过了，避免循环引用引起的死循环
+  seen.add(value);
+
+  for (const k in value) {
+    traverse(value[k], seen);
+  }
+  return value;
 }
