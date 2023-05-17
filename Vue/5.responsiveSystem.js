@@ -1030,7 +1030,7 @@ const watchComputed = effect(() => console.log('我在监听计算属性的变�
 
 // watch 的定义
 function watch (source, cb, options = {}) {
-  debugger
+  
 
   let newValue, oldValue;
   let getter;
@@ -1042,19 +1042,19 @@ function watch (source, cb, options = {}) {
 
   let cleanup;
   function onInvalidate (fn) {
-    debugger
+    
     // 将过期回调函数存储到cleanup中
     cleanup = fn;
   }
 
-  function job () {
-    debugger
+  const job = () =>{
+    ;
     newValue = effectFn();
     if (cleanup) {
-      debugger
+      
       cleanup();
     }
-    cb(newValue, oldValue,onInvalidate);// 作用域链找到了外面定义的onInvalidate,并把cleanup变量的值赋值为onInvalidate传递进来的函数
+    cb(newValue, oldValue, onInvalidate); // 作用域链找到了外面定义的onInvalidate,并把cleanup变量的值赋值为onInvalidate传递进来的函数
     oldValue = newValue;
   }
 
@@ -1064,10 +1064,10 @@ function watch (source, cb, options = {}) {
     lazy:true,
       scheduler: () => {
         if (options.flush === 'post') {
-          const p = Promise.resolve();// 不同的
+          const p = Promise.resolve();// 同步的
           p.then(job);// 异步的
         } else {
-          job
+          job();
         }
       }
     })
@@ -1078,25 +1078,22 @@ function watch (source, cb, options = {}) {
   } else {
     oldValue = effectFn();
   }
-  
-  // 手动调用副作用函数，拿到的值就是旧值
-  // 这里的手动执行相当于初始化，只是为了收集依赖，并不是watch的callback
-  oldValue = effectFn();
+
 }
 
 function traverse (value, seen = new Set()) {
-  if (typeof value !== 'object' || value === null || !seen.has(value)) return;
+  if (typeof value !== 'object' || value === null || seen.has(value)) return;
   
   seen.add(value);
-  if (Array.isArray(value)) {
-    for (let v of value) {
-      traverse(v, seen);
-    }
-  } else {
+  // if (Array.isArray(value)) {
+  //   for (let v of value) {
+  //     traverse(v, seen);
+  //   }
+  // } else {
     for (let k in value) {
       traverse(value[k], seen);
     }
-  }
+  // }
   return value;
 }
 // 调用watch
@@ -1104,22 +1101,29 @@ watch(obj, async (newValue, oldValue, onInvalidate) => {
   let expired = false;
   let finalData;
 
-  onInvalidate(() => expired = true);
 
-  const res = await Promise.resolve().then(setTimeout(()=> 100,40000));
 
+  onInvalidate(() => { ; expired = true });
+
+  const res = await Promise.resolve().then(setTimeout(()=> 500,4000));
+  
+  console.log('expired', expired);
   if (!expired) {
-    console.log('obj', JSON.stringify(obj));
+   
     finalData = res;
   }
-},{immediate:true})
+})
 
 
-// 第一次修改
 obj.foo++;
 
-setTimeout(() => {
-  // 200ms 后做第二次修改
-  obj.foo ++
-},200)
+console.log('第一次变动');
+
+
+Promise.resolve().then(() => {
+  console.log('第二次变动');
+  ;
+  obj.foo++;
+});
+
 
