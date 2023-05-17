@@ -1028,7 +1028,9 @@ const test = computed(() => obj.foo + obj.bar);
 
 const watchComputed = effect(() => console.log('我在监听计算属性的变化:', test.value));
 
+// watch 的定义
 function watch (source, cb, options = {}) {
+  debugger
 
   let newValue, oldValue;
   let getter;
@@ -1040,16 +1042,19 @@ function watch (source, cb, options = {}) {
 
   let cleanup;
   function onInvalidate (fn) {
+    debugger
+    // 将过期回调函数存储到cleanup中
     cleanup = fn;
   }
 
   function job () {
+    debugger
     newValue = effectFn();
     if (cleanup) {
       debugger
       cleanup();
     }
-    cb(newValue, oldValue,onInvalidate);
+    cb(newValue, oldValue,onInvalidate);// 作用域链找到了外面定义的onInvalidate,并把cleanup变量的值赋值为onInvalidate传递进来的函数
     oldValue = newValue;
   }
 
@@ -1059,8 +1064,8 @@ function watch (source, cb, options = {}) {
     lazy:true,
       scheduler: () => {
         if (options.flush === 'post') {
-          const p = Promise.resolve();
-          p.then(job);
+          const p = Promise.resolve();// 不同的
+          p.then(job);// 异步的
         } else {
           job
         }
@@ -1094,52 +1099,27 @@ function traverse (value, seen = new Set()) {
   }
   return value;
 }
+// 调用watch
+watch(obj, async (newValue, oldValue, onInvalidate) => {
+  let expired = false;
+  let finalData;
 
-watch(
-  obj,
-  async (newValue, oldValue, onInvalidate) => {
-    debugger;
-    let expired = false;
+  onInvalidate(() => expired = true);
 
-    onInvalidate(() => {
-      debugger;
-      expired = true;
-    });
+  const res = await Promise.resolve().then(setTimeout(()=> 100,40000));
 
-    const res = await 1;
+  if (!expired) {
+    console.log('obj', JSON.stringify(obj));
+    finalData = res;
+  }
+},{immediate:true})
 
-    if (!expired) {
-      debugger;
-      finalData = res;
-    }
-  },
-  { immediate: true, flush :'post'}
-);
 
 // 第一次修改
 obj.foo++;
+
 setTimeout(() => {
-  obj.foo++
-}, 200)
+  // 200ms 后做第二次修改
+  obj.foo ++
+},200)
 
-
-function foo() {
-  var myName = '极客时间';
-  let test1 = 1;
-  const test2 = 2;
-  var innerBar = {
-    getName: function() {
-      debugger
-      console.log(test1);
-      return myName;
-    },
-    setName: function (newName) {
-      myName = newName;
-    },
-  };
-  return innerBar;
-}
-var bar = foo();
-bar.setName('极客邦');
-bar.getName();
-console.log(bar.getName());
