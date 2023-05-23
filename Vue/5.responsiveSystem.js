@@ -993,137 +993,151 @@ function effect(fn, options = {}) {
 // }
 
 // 实现computed
-function computed (getter) {
-  let value;
-  let dirty = true;
-  const effectFn = effect(
-    getter,
-    {
-      lazy: true,
-      scheduler () {
-        if (!dirty) {
-          dirty = true;
-        }
-        trigger(obj, 'value');
-      }
-    }
-  );
+// function computed (getter) {
+//   let value;
+//   let dirty = true;
+//   const effectFn = effect(
+//     getter,
+//     {
+//       lazy: true,
+//       scheduler () {
+//         if (!dirty) {
+//           dirty = true;
+//         }
+//         trigger(obj, 'value');
+//       }
+//     }
+//   );
 
-  const obj = {
-    get value () {
-      if (dirty) {
-        value = effectFn();
-        dirty = false;
+//   const obj = {
+//     get value () {
+//       if (dirty) {
+//         value = effectFn();
+//         dirty = false;
         
-      }
-      track(obj, 'value');
-      return value;
-    }
-  }
+//       }
+//       track(obj, 'value');
+//       return value;
+//     }
+//   }
 
-  return obj;
-}
+//   return obj;
+// }
 
-const test = computed(() => obj.foo + obj.bar);
+// // const test = computed(() => obj.foo + obj.bar);
 
-const watchComputed = effect(() => console.log('我在监听计算属性的变化:', test.value));
+// // const watchComputed = effect(() => console.log('我在监听计算属性的变化:', test.value));
 
-// watch 的定义
-function watch (source, cb, options = {}) {
+// // watch 的定义
+// function watch (source, cb, options = {}) {
+//   debugger
+
+//   let newValue, oldValue;
+//   let getter;
+//   if (typeof source === 'function') {
+//     getter = source;
+//   } else {
+//     getter = () => traverse(source);
+//   }
+
+//   let cleanup;
+//   function onInvalidate (fn) {
+//     debugger
+//     // 将过期回调函数存储到cleanup中
+//     cleanup = fn;
+//   }
+
+//   const job = () => {
+//     debugger
+//     newValue = effectFn();
+//     debugger
+//     if (cleanup) {
+//       debugger
+//       cleanup();
+//     }
+//     cb(newValue, oldValue, onInvalidate); // 作用域链找到了外面定义的onInvalidate,并把cleanup变量的值赋值为onInvalidate传递进来的函数
+//     oldValue = newValue;
+//   }
+
+//   const effectFn = effect(
+//     () => getter(),
+//     {
+//     lazy:true,
+//       scheduler: () => {
+//         if (options.flush === 'post') {
+//           const p = Promise.resolve();// 同步的
+//           debugger
+//           p.then(job);// 异步的
+//         } else {
+//           debugger
+//           job();
+//         }
+//       }
+//     })
   
+//   if (options.immediate) {
+//     // 当immediate为true立即执行job,从而触发回调执行
+//     job();
+//   } else {
+//     oldValue = effectFn();
+//   }
 
-  let newValue, oldValue;
-  let getter;
-  if (typeof source === 'function') {
-    getter = source;
-  } else {
-    getter = () => traverse(source);
-  }
+// }
 
-  let cleanup;
-  function onInvalidate (fn) {
-    
-    // 将过期回调函数存储到cleanup中
-    cleanup = fn;
-  }
-
-  const job = () =>{
-    ;
-    newValue = effectFn();
-    if (cleanup) {
-      
-      cleanup();
-    }
-    cb(newValue, oldValue, onInvalidate); // 作用域链找到了外面定义的onInvalidate,并把cleanup变量的值赋值为onInvalidate传递进来的函数
-    oldValue = newValue;
-  }
-
-  const effectFn = effect(
-    () => getter(),
-    {
-    lazy:true,
-      scheduler: () => {
-        if (options.flush === 'post') {
-          const p = Promise.resolve();// 同步的
-          p.then(job);// 异步的
-        } else {
-          job();
-        }
-      }
-    })
+// function traverse (value, seen = new Set()) {
+//   if (typeof value !== 'object' || value === null || seen.has(value)) return;
   
-  if (options.immediate) {
-    // 当immediate为true立即执行job,从而触发回调执行
-    job();
-  } else {
-    oldValue = effectFn();
-  }
+//   seen.add(value);
+//   // if (Array.isArray(value)) {
+//   //   for (let v of value) {
+//   //     traverse(v, seen);
+//   //   }
+//   // } else {
+//     for (let k in value) {
+//       traverse(value[k], seen);
+//     }
+//   // }
+//   return value;
+// }
+// // 调用watch
+// watch(obj, async (newValue, oldValue, onInvalidate) => {
+//   debugger
+//   let expired = false;
+//   let finalData;
 
-}
 
-function traverse (value, seen = new Set()) {
-  if (typeof value !== 'object' || value === null || seen.has(value)) return;
+
+//   onInvalidate(() => {
+//     debugger
+//     expired = true
+//   });
+
+//   const res = await Promise.resolve().then(setTimeout(()=> console.log('setTimeout执行'),4000));
   
-  seen.add(value);
-  // if (Array.isArray(value)) {
-  //   for (let v of value) {
-  //     traverse(v, seen);
-  //   }
-  // } else {
-    for (let k in value) {
-      traverse(value[k], seen);
-    }
-  // }
-  return value;
-}
-// 调用watch
-watch(obj, async (newValue, oldValue, onInvalidate) => {
-  let expired = false;
-  let finalData;
-
-
-
-  onInvalidate(() => { ; expired = true });
-
-  const res = await Promise.resolve().then(setTimeout(()=> 500,4000));
-  
-  console.log('expired', expired);
-  if (!expired) {
+//   console.log('expired', expired);
+//   debugger
+//   if (!expired) {
    
-    finalData = res;
-  }
-})
+//     finalData = res;
+//   }
+// })
 
 
-obj.foo++;
 
-console.log('第一次变动');
+// Promise.resolve().then(() => {
+//   console.log('第三次变动');
+//   obj.foo++;
+//   debugger;
+// });
 
 
-Promise.resolve().then(() => {
-  console.log('第二次变动');
-  ;
-  obj.foo++;
-});
+
+
+
+
+
+
+
+
 
 
