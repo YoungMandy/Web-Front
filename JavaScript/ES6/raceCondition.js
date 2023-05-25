@@ -38,7 +38,7 @@ b();
 
 // 第一次执行b(),ajaxControl 里调用cb的时候传onInvalidate变量给ajax方法，它是一个指向函数的指针，在ajax内部调用了onInvalidate函数，从而把ajaxControl函数中的cleanup变量指向箭头函数()=> expired,
 
-// 执行到await的时候，会先交换控制权，等异步操作完成，再接着执行后面语句
+// 执行到await的时候，执行后面的任务，接着交出控制权，等消息队列的同步任务都执行完毕，再接着执行await 的下一条语句
 
 // 接下来第二次b(),因为cleanup变量已经指向了箭头函数()=> expired,所以执行后expired 变为true,
 // 而 cb(onInvalidate)执行，ajax函数重新入调用栈，这里新创建了一个叫expired的变量，初始值为false,因为没有操作把expired变量改为true,所以这个变量的输出值为false
