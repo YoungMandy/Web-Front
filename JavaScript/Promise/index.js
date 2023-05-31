@@ -1,4 +1,4 @@
-Promise.prototype.allSettled = function(list) {
+Promise.allSettled = function(list) {
   const task = [];
   return new Promise(resolve => {
     list.forEach(element => {
