@@ -12,6 +12,7 @@ let Plane = function () {
 };
 
 let plane = new Plane();
+
 plane.blood = 500;
 plane.attackLevel = 10;
 plane.defenseLevel = 7;
