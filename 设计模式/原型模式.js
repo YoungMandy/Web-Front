@@ -33,3 +33,17 @@ Object.create =
 
     return new F();
   };
+
+Object.create = Object.create || function(obj) {
+  var F = function() {
+      
+  }
+  F.prototype = obj;
+  return new F();
+}
+
+// new 构造函数调用会
+// 1.创建一个tempObj对象
+// 2.tempObj 对象的[[Prototype]] 会链接到构造函数的prototype
+// 3.this指向会指向这个tempObj对象(相当于调用CreateFn.call(tempObj))
+// 4.如果没有返回值会默认将tempObj对象进行返回
