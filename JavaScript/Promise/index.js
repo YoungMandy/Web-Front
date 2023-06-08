@@ -17,3 +17,45 @@ Promise.allSettled = function(list) {
     });
   })
 }
+
+Promise.allsettled = function(list) {
+  const task = [];
+  return new Promise((resolve) => {
+    list.forEach(element => {
+      Promise.resolve(element).then(res => {
+        task.push({ status: 'fulfilled', value: res });
+        task.length === list.length && resolve(task);
+        
+      }).catch(err => {
+        task.push({ status: 'rejected', reason: err });
+        task.length === list.length && resolve(task);
+      })
+    })
+  })
+}
+
+Promise.all = function(list) {
+  const task = [];
+  return new Promise((resolve, reject) => {
+    list.forEach(element => {
+      Promise.resolve(element).then(res => {
+        task.push(res);
+        task.length === list.length && resolve(task);
+      }).catch(err => {
+        reject(err);
+      })
+    })
+  })
+}
+
+Promise.race = function(list) {
+  return new Promise((resolve, reject) => {
+    list.forEach(element => {
+      Promise.resolve(element).then(res => {
+        resolve(res);
+      }).catch(err => {
+        reject(err);
+      })
+    })
+  })
+}
