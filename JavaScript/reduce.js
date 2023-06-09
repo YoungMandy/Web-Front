@@ -139,3 +139,4 @@ function reduce1 (arr, callback, initialValue) {
   }
   return accumulator;
 }
+
