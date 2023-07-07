@@ -36,7 +36,7 @@ salesOffices.trigger('squareMeter110', 300000);
 
 // 设计一个统用的发布订阅功能
 const events = {
-  clientList: [],
+  clientList: {},
   listen: function(key, fn) {
     if (!this.clientList[key]) {
       this.clientList[key] = [];
@@ -96,17 +96,18 @@ salesOffices.trigger('squareMeter88', 200000);
 // 发布订阅可以用一个全局的Event对象来实现，订阅者不需要了解消息来自哪个发布者，发布者也不知道消息会推送给那个订阅者，Event作为一个类似"中介者"的角色，把订阅者和发布者联系起来
 
 const Events = (function() {
-  let clientList = {},
-    listen,
-    trigger,
-    remove;
-  
-  listen = function(key, fn) {
-    if (!clientList[key]) {
-      clientList[key] = [];
-    }
-    clientList[key].push(fn);
-  };
+  let clientList = {
+      listen,
+      trigger,
+      remove,
+  },
+    
+    listen = function (key, fn) {
+      if (!clientList[key]) {
+        clientList[key] = [];
+      }
+      clientList[key].push(fn);
+    };
 
   trigger = function() {
     let key = Array.prototype.shift.call(arguments),
