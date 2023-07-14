@@ -36,11 +36,13 @@ Promise.allsettled = function(list) {
 
 Promise.all = function(list) {
   const task = [];
+  let count = 0;
   return new Promise((resolve, reject) => {
-    list.forEach(element => {
+    list.forEach(element,index => {
       Promise.resolve(element).then(res => {
-        task.push(res);
-        task.length === list.length && resolve(task);
+        task[index] = res;
+        count++;
+        count === list.length && resolve(task);
       }).catch(err => {
         reject(err);
       })
