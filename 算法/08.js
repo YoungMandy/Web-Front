@@ -10,6 +10,8 @@ var myAtoi = function (s) {
   let res = 0;
   let prev;
   let lockRes = false;
+  console.log('s', s);
+  debugger
 
   for (let i = 0; i < s.length; i++) {
     if (lockRes) {
@@ -20,16 +22,13 @@ var myAtoi = function (s) {
     if (prev !== undefined) {
       // 已经记录有值
       if (prev == '+' || prev == '-') {
-        if (cur == '-' || cur == '+' || cur == ' ') {
-          return 0;
-        }
-        if (isNaN(cur)) {
+        if (cur == '-' || cur == '+' || isNaN(cur) || cur == ' ') {
           return 0;
         } else {
           helper(cur);
         }
       } else if (!isNaN(prev)) {
-        if (cur == '+' || cur == '-' || cur == ' ' || isNaN(cur)) {
+        if (isNaN(cur) || cur == ' ') {
           return minus ? -res : res;
         } else {
           helper(cur);
@@ -44,10 +43,9 @@ var myAtoi = function (s) {
         minus = true;
       }else if (!isNaN(cur)) {
         helper(cur);
-      } else if (isNaN(cur)) {
+      }else if (isNaN(cur)) {
         return 0;
       }
- 
     }
   }
 
@@ -56,7 +54,7 @@ var myAtoi = function (s) {
 
     if (minus) {
       if (-res < MIN) {
-        res = -MIN;
+        res = -MIN;// 因为返回的时候还会根据minus的值判断是否加符号
         lockRes = true;
       }
     } else {
@@ -69,4 +67,4 @@ var myAtoi = function (s) {
 
   return minus ? -res : res;
 };
-console.log(myAtoi('-91283472332"'));
+console.log(myAtoi(" + 314"));
