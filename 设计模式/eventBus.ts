@@ -1,27 +1,26 @@
 class EventBus{
   events: {};
 
-  constructor () {
-    this.events = {};
-  }
-
-  emit (eventName:string) {
-    if (this.events[eventName]?.length > 0) {
-      const events = this.events[eventName];
-      events.forEach(fn => fn());
+  // 绑定注册事件
+  on (eventName: string, fn: any) {
+    if (this.events[eventName]) {
+      this.events[eventName].push(fn)
+    } else {
+      this.events[eventName] =[fn]
     }
   }
 
-  on (eventName, fn) {
-     if (!(eventName in this.events)) {
-       this.events[eventName] = [];
-     }
-     this.events[eventName].push(fn);
+  // 发布事件
+  emit (eventName: string,...params) {
+    const events = this.events[eventName];
+    if (events && events.length > 0) {
+      events.forEach(fn => fn(...params));
+    }
   }
 
-  remove (eventName) {
-    if (eventName in this.events) { 
-       delete this.events[eventName];
+  remove (eventName: string) {
+    if (this.events[eventName]) { 
+      delete this.events[eventName];
     }
   }
 }
