@@ -1277,6 +1277,7 @@ function cleanup (effectFn) {
 }
 
 installEffect(() => {
+  debugger
   console.log(obj.num);
   // document.body.innerText = obj.ok ? obj.text : 'not';
 }, {
