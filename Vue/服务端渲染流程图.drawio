@@ -40,13 +40,13 @@
                     <mxGeometry x="410" y="100" width="70" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="10" value="③" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-                    <mxGeometry x="420" y="290" width="60" height="30" as="geometry"/>
+                    <mxGeometry x="420" y="280" width="60" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="11" value="数据" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
                     <mxGeometry x="414" y="230" width="70" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="14" value="④" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-                    <mxGeometry x="300" y="290" width="60" height="30" as="geometry"/>
+                    <mxGeometry x="300" y="280" width="60" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="15" value="" style="endArrow=classic;html=1;exitX=-0.014;exitY=0.898;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="3">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -54,8 +54,14 @@
                         <mxPoint x="140" y="260" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="16" value="Text" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                <mxCell id="16" value="⑤" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
                     <mxGeometry x="170" y="270" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="数据+ 模版&amp;nbsp; =&amp;gt;&amp;nbsp; HTML字符串" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="260" y="310" width="160" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="HTML字符串" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="170" y="230" width="80" height="20" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
