@@ -115,8 +115,11 @@
                 <mxCell id="28" value="parse" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
                     <mxGeometry x="170" y="480" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="29" value="Text" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                <mxCell id="29" value="transform" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
                     <mxGeometry x="370" y="480" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="30" value="代码生成" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="570" y="480" width="60" height="30" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
