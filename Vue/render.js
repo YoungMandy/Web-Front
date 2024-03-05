@@ -1,24 +1,22 @@
-const render = function(obj, root){
+function render (obj, root) {
   const el = document.createElement(obj.tag);
   if (typeof obj.children === 'string') {
     const text = document.createTextNode(obj.children);
-    el.appendChild(text);
+    el.appendChild(text)
   } else if (Array.isArray(obj.children)) {
-    obj.children.forEach(child => render(child,root))
+    obj.children.forEach(item => render(item,el))
   }
 
-  root.appendChild(el);
+  root.appendChild(el)
 }
 
-const obj = {
-  tag: 'div',
-  children: [
-    {
-      tag: 'span',
-      children:'hello world'
-    }
-  ]
-}
+const root = document.getElementById('test');
 
-// 渲染到body下
-render(obj, document.body);
+render({ tag: 'div', children: '123' }, root)
+
+const a = 456;
+
+// 把html标签编译成树型结构的数据对象
+function compiler () {
+  
+}
