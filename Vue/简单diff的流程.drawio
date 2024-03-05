@@ -1,0 +1,55 @@
+<mxfile host="65bd71144e">
+    <diagram id="1Wjprq1BharORywTtAE-" name="第 1 页">
+        <mxGraphModel dx="699" dy="680" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="逐个对比新旧节点的key值，找到可以复用的节点" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="220" y="50" width="120" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="" style="edgeStyle=none;html=1;" parent="1" source="3" target="5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="调用path函数进行打补丁" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="220" y="180" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="" style="endArrow=classic;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" target="3" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="280" y="120" as="sourcePoint"/>
+                        <mxPoint x="330" y="70" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="9" value="" style="edgeStyle=none;html=1;fontSize=14;" parent="1" source="5" target="8" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="找到需要移动的节点" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="220" y="300" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="&lt;h1&gt;逆向思维：在什么情况下节点不需要移动？&lt;/h1&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;p&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;答：在新旧两组子节点的顺序不变时，不需要额外的移动操作&lt;br&gt;&lt;br&gt;在每一次寻找可复用节点时，都会记录该可复用节点在旧的一组子节点中的位置索引，如果把这些位置所以按先后顺序排列，得到一个递增的序列，在这种情况下不需要移动节点&amp;nbsp;&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="370" y="230" width="400" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="" style="edgeStyle=none;html=1;fontSize=14;fontColor=#FFFFFF;" parent="1" source="8" target="10" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="在旧children中寻找相同key节点的过程中，遇到的最大索引值。&lt;br&gt;&lt;br&gt;如果在后续的查找过程中，&lt;font color=&quot;#ffff00&quot;&gt;该节点(在旧数组中) 的索引比当前遇到的最大索引值还要小&lt;/font&gt;，则意味该节点需要移动" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="135" y="440" width="290" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="&lt;font color=&quot;#ffffff&quot;&gt;移动节点是指，移动一个虚拟节点所对应的真实DOM节点。&lt;br&gt;真实DOM节点存储在vnode.el上&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontColor=#FFFF00;" parent="1" vertex="1">
+                    <mxGeometry x="150" y="620" width="260" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="情况1，节点个数不变，只需要调整顺序" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="150" y="770" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="13" target="14">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="情况2，新增节点" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="150" y="860" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="在遍历过程中，找不到新node对应的旧节点，把它看成新增节点挂载" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="320" y="860" width="280" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
