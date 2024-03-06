@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="1Wjprq1BharORywTtAE-" name="第 1 页">
-        <mxGraphModel dx="699" dy="680" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1165" dy="1133" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -34,20 +34,35 @@
                 <mxCell id="8" value="在旧children中寻找相同key节点的过程中，遇到的最大索引值。&lt;br&gt;&lt;br&gt;如果在后续的查找过程中，&lt;font color=&quot;#ffff00&quot;&gt;该节点(在旧数组中) 的索引比当前遇到的最大索引值还要小&lt;/font&gt;，则意味该节点需要移动" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;align=left;" parent="1" vertex="1">
                     <mxGeometry x="135" y="440" width="290" height="120" as="geometry"/>
                 </mxCell>
-                <mxCell id="10" value="&lt;font color=&quot;#ffffff&quot;&gt;移动节点是指，移动一个虚拟节点所对应的真实DOM节点。&lt;br&gt;真实DOM节点存储在vnode.el上&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontColor=#FFFF00;" parent="1" vertex="1">
+                <mxCell id="10" value="&lt;font color=&quot;#ffffff&quot;&gt;移动节点是指，移动一个虚拟节点所对应的真实DOM节点。&lt;br&gt;真实DOM节点存储在vnode.el上&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontColor=#FFFF00;align=left;" parent="1" vertex="1">
                     <mxGeometry x="150" y="620" width="260" height="110" as="geometry"/>
                 </mxCell>
-                <mxCell id="12" value="情况1，节点个数不变，只需要调整顺序" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="150" y="770" width="120" height="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="15" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="13" target="14">
+                <mxCell id="20" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="12" target="19">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="13" value="情况2，新增节点" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="12" value="情况1，节点个数不变，只需要调整顺序" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="150" y="770" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="" style="edgeStyle=none;html=1;" parent="1" source="13" target="14" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="情况2，新增节点" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="150" y="860" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="14" value="在遍历过程中，找不到新node对应的旧节点，把它看成新增节点挂载" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="14" value="在遍历过程中，找不到新node对应的旧节点，把它看成新增节点挂载" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="320" y="860" width="280" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="" style="edgeStyle=none;html=1;" parent="1" source="16" target="17" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="情况3，节点被删除" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="150" y="950" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="在更新完成之后，遍历旧的一组节点，检查旧的子节点在新的一组子节点中是否存在，如果不存在了，调用unmount函数将其卸载" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="320" y="950" width="370" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="遍历新的节点数组，如果节点在oldVNode中的索引小于当前最大索引值，说明要移动到前一个newVnode的下一个兄弟节点前面" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="320" y="770" width="310" height="60" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

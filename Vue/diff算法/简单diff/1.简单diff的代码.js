@@ -20,7 +20,7 @@ function pathChildren(n1, n2, container) {
           // 找到可以复用的节点
           pathChildren(oldVNode, newVNode);// 更新节点内容
           
-          if (j < lastIndex) { // 节点的索引值小于当前的最大索引值，说明被移动到了后面
+          if (j < lastIndex) { // 节点的索引值小于当前的最大索引值(在旧数组中的最大索引)，说明被移动到了后面
             // 先获取newVNode的前一个vnode,即prevNode
             const prevNode = newChildren[i - 1];
             // 如果prevNode不存在，则说明当前newVNode是第一个节点，它不需要移动
