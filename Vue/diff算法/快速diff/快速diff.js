@@ -58,7 +58,7 @@ function patchKeyedChildren(n1, n2, container) {
     const oldStart = j;
     const newStart = j;
 
-    // 时间复杂度太高
+    // 时间复杂度太高,不能这么写
     // // 遍历旧的一组子节点
     // for (let i = oldStart; i <= oldEnd; i++){
     //   const oldVNode = oldChildren[i];
@@ -119,7 +119,7 @@ function patchKeyedChildren(n1, n2, container) {
 
     if (moved) {
       // 计算最长递增子序列，子序列在更新前后顺序没有变化
-      const seq = lis(source);// 返回的是索引值
+      const seq = getSequence(source);// 返回的是索引值
 
       // s指向最长递增子序列的最后一个元素
       let s = seq.length - 1;
@@ -161,3 +161,58 @@ function patchKeyedChildren(n1, n2, container) {
 
 // oldEnd < j 说明在预处理过程中，所有旧节点都被处理完了
 // newEnd >= j ,在预处理过程中,在新的一组子节点中，依然有未被处理的节点，而这些遗留的节点被视为新节点
+
+// 获取最长递增子序列
+function getSequence (arr) {
+  const p = arr.slice();
+  const result = [0];// 返回的是索引
+
+  let i, j, u, v, c;
+  const len = arr.length;
+
+  for (let i = 0; i < len; i++){ // 遍历数组
+    const arrI = arr[i];
+
+    if (arrI !== 0) {
+      j = result[result.length - 1];
+
+      if (arr[j] < arrI) { // 当前元素的值大于最小递增序列的最后一个值
+        p[i] = j;// ?
+        result.push(i);
+        continue;
+
+      }
+
+      u = 0;
+      v = result.length - 1;
+      while (u < v) {
+        c = ((u + v) / 2) | 0;
+
+        if (arr[result[c]] < arrI) {
+          u = c + 1;
+        } else {
+          v = c;
+        }
+      }
+
+      if (arrI < arr[result[u]]) {
+        if (u > 0) {
+          p[i] = result[u - 1];
+        }
+        result[u] = i;
+      }
+    }
+    
+  }
+
+  u = result.length;
+  v = result[u - 1];
+
+  while (u-- > 0) {
+    result[u] = v;
+    v = p[v]
+  }
+
+  return result;
+}
+

@@ -9,7 +9,7 @@ function patchChildren(n1, n2, container) {
   }
 }
 
-function patchKeyedChildren(n1, n2, container) {
+function patchKeyedChildren (n1, n2, container) {
   const oldChildren = n1.children;
   const newChildren = n2.children;
 
@@ -34,7 +34,7 @@ function patchKeyedChildren(n1, n2, container) {
     } else if (!oldEndVNode) {
       oldEndVNode = oldChildren[--oldEndIdx];
 
-    }else if (oldStartVNode.key == newStartVNode.key) {
+    } else if (oldStartVNode.key == newStartVNode.key) {
       // 第一步，oldStartVNode 和 newStartVNode比较（头部节点比较）
       patch(oldStartVNode, newStartVNode, container);
       oldStartVNode = oldChildren[++oldStartIdx];
@@ -87,25 +87,27 @@ function patchKeyedChildren(n1, n2, container) {
         newStartVNode = newChildren[++newStartIdx];
         
       } else { // 说明是新增的节点，当前在新数组中是newStartIdx
-        patch(undefined,newStartVNode,container,oldStartVNode.el)
+        patch(undefined, newStartVNode, container, oldStartVNode.el)
         newStartVNode = newChildren[++newStartIdx];
       }
-  }
+    }
   }
 
   // 循环结束后检查索引值的情况
   if (oldEndIdx < oldStartIdx && newStartIdx <= newEndIdx) {
     // 说明有新的节点遗漏，需要挂载
-    for (let i = newStartIdx; i <= newEndIdx; i++){
+    for (let i = newStartIdx; i <= newEndIdx; i++) {
       patch(null, newChildren[i], container, oldEndVNode.el);
     }
     
   } else if (newEndIdx < newStartIdx && newStartIdx <= newEndIdx) {
     // 移除操作
-    for (let i = oldStartIdx; i <= oldEndIdx; i++) { 
+    for (let i = oldStartIdx; i <= oldEndIdx; i++) {
       unmount(oldChildren[i]);
     }
   }
+}
+
 
 
 

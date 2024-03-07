@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="1Wjprq1BharORywTtAE-" name="第 1 页">
-        <mxGraphModel dx="1165" dy="1133" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="699" dy="409" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -10,7 +10,7 @@
                 <mxCell id="6" value="" style="edgeStyle=none;html=1;" parent="1" source="3" target="5" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="3" value="调用path函数进行打补丁" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                <mxCell id="3" value="调用path函数DOM内容的更新" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="220" y="180" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="4" value="" style="endArrow=classic;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" target="3" edge="1">
@@ -37,7 +37,7 @@
                 <mxCell id="10" value="&lt;font color=&quot;#ffffff&quot;&gt;移动节点是指，移动一个虚拟节点所对应的真实DOM节点。&lt;br&gt;真实DOM节点存储在vnode.el上&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontColor=#FFFF00;align=left;" parent="1" vertex="1">
                     <mxGeometry x="150" y="620" width="260" height="110" as="geometry"/>
                 </mxCell>
-                <mxCell id="20" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="12" target="19">
+                <mxCell id="20" value="" style="edgeStyle=none;html=1;" parent="1" source="12" target="19" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="12" value="情况1，节点个数不变，只需要调整顺序" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -61,7 +61,7 @@
                 <mxCell id="17" value="在更新完成之后，遍历旧的一组节点，检查旧的子节点在新的一组子节点中是否存在，如果不存在了，调用unmount函数将其卸载" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="320" y="950" width="370" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="19" value="遍历新的节点数组，如果节点在oldVNode中的索引小于当前最大索引值，说明要移动到前一个newVnode的下一个兄弟节点前面" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="19" value="遍历新的节点数组，如果节点在oldVNode中的索引小于当前最大索引值，说明要移动到前一个newVnode的下一个兄弟节点前面" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="320" y="770" width="310" height="60" as="geometry"/>
                 </mxCell>
             </root>
