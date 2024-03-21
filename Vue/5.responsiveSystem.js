@@ -767,32 +767,32 @@
 
 // // }
 
-// // function computed (getter) {
-// //   let value;
-// //   let dirty = true;// 数据脏的时候需要刷新
-// //   const effectFn = effect(getter, {
-// //     lazy: true,
-// //     scheduler: () => {
-// //       if (!dirty) {
-// //         dirty = true;
-// //         trigger(obj, 'value');
-// //       }
-// //     }
-// //   });
+function computed (getter) {
+  let value;
+  let dirty = true;// 数据脏的时候需要刷新
+  const effectFn = effect(getter, {
+    lazy: true,
+    scheduler: () => {
+      if (!dirty) {
+        dirty = true;
+        trigger(obj, 'value');
+      }
+    }
+  });
 
-// //   const obj = {
-// //     get value () {
-// //       if (dirty) { 
-// //         value = effectFn();
-// //         dirty = false;
-// //       }
-// //       track(obj, 'value');
-// //       return value;
-// //     }
-// //   }
+  const obj = {
+    get value () {
+      if (dirty) { 
+        value = effectFn();
+        dirty = false;
+      }
+      track(obj, 'value');
+      return value;
+    }
+  }
 
-// //   return obj;
-// // }
+  return obj;
+}
 
 
 // // const sumRes = computed(() => obj.foo + obj.bar);
