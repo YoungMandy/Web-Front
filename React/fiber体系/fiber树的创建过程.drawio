@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="K95BOhvK7CKRiZBYVhQK" name="第 1 页">
-        <mxGraphModel dx="789" dy="595" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="928" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -90,8 +90,8 @@
                 <mxCell id="24" value="得到子代children: Array&amp;lt;Element&amp;gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;gradientColor=none;" vertex="1" parent="1">
                     <mxGeometry x="490" y="430" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="26" value="执行renderWithHooks" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-                    <mxGeometry x="570" y="380" width="60" height="30" as="geometry"/>
+                <mxCell id="26" value="通过renderWithHooks执行函数组件" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="570" y="380" width="200" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="30" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="27" target="29">
                     <mxGeometry relative="1" as="geometry"/>
