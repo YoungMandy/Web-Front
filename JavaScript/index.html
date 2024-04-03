@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div
+      id="content"
+      style="
+        height: 150px;
+        line-height: 150px;
+        text-align: center;
+        color: #fff;
+        background-color: #ccc;
+        font-size: 80px;
+      "
+    ></div>
+    <script>
+      let num = 1;
+      let content = document.getElementById('content');
+
+      function count() {
+        content.innerHTML = num++;
+      }
+     
+      function debounce(fn, gap) {
+        let timer;
+        return function () {
+          let context = this;
+
+          if (timer) clearTimeout(timer);
+          timer = setTimeout(() => {
+            // 因为setTimeout里面的this默认指向windows变量
+            // 箭头函数的arguments就是外部的arguments
+            fn.apply(context, arguments);
+          }, gap);
+        };
+      }
+
+      
+
+      //  content.onmousemove = count;
+       content.onmousemove = debounce(count, 500);
+    </script>
+  </body>
+</html>
