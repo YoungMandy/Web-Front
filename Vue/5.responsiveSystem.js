@@ -327,7 +327,319 @@
 // // 缺陷：如果obj.num++场景会导致栈溢出
 
 // 第六版:避免递归死循环
-// 第五版:增加调用栈
+// let activeEffect;
+
+// const effectStack = [];
+// const bucket = new WeakMap();
+
+// const data = {
+//   text: 'hello world',
+//   ok: true,
+//   text1: 1,
+//   text2: 2,
+//   num: 1,
+//   foo:1
+// };
+
+// function effect(fn) {
+//   const effectFn = () => {
+//     cleanup(effectFn);
+//     activeEffect = effectFn;
+//     effectStack.push(effectFn); // 入栈
+
+//     fn(); //执行
+//     effectStack.pop(); //执行完毕出栈
+//     activeEffect = effectStack[effectStack.length - 1];
+//   };
+//   effectFn.deps = [];
+//   effectFn();
+// }
+
+// function track(target, key) {
+//   if (!activeEffect) return target[key];
+//   // 根据target,从桶里取得depsMap,它也是Map类型：key-> effects<Set>
+//   let depsMap = bucket.get(target);
+
+//   if (!depsMap) {
+//     bucket.set(target, (depsMap = new Map()));
+//   }
+
+//   let deps = depsMap.get(key);
+
+//   if (!deps) {
+//     depsMap.set(key, (deps = new Set()));
+//   }
+//   deps.add(activeEffect);
+
+//   activeEffect.deps.push(deps);
+// }
+
+// function trigger(target, key) {
+//   const depsMap = bucket.get(target);
+
+//   if (!depsMap) return;
+
+//   const deps = depsMap.get(key);
+//   const effects = new Set(deps);
+
+//   if (effects) {
+//     effects.forEach((fn) => {
+//       if (fn !== activeEffect) {
+//         fn();
+//       }
+//     });
+//   }
+// }
+
+// function cleanup(effectFn) {
+//   for (let i = 0; i < effectFn.deps.length; i++) {
+//     const deps = effectFn.deps[i];
+//     deps.delete(effectFn);
+//   }
+
+//   effectFn.deps.length;
+// }
+
+// const obj = new Proxy(data, {
+//   get(target, key) {
+//     track(target, key);
+//     return target[key];
+//   },
+//   set(target, key, val) {
+//     target[key] = val;
+//     trigger(target, key);
+//   },
+// });
+
+// let temp1, temp2;
+// effect(function effect1 () {
+//   console.log('副作用函数1执行了');
+//  obj.num++;
+// });
+
+// 缺陷：不能调度执行
+
+// 第七版:实现调度执行
+// let activeEffect;
+
+// const effectStack = [];
+// const bucket = new WeakMap();
+
+// const data = {
+//   text: 'hello world',
+//   ok: true,
+//   text1: 1,
+//   text2: 2,
+//   num: 1,
+//   foo:1
+// };
+
+// function effect(fn,options) {
+//   const effectFn = () => {
+//     cleanup(effectFn);
+//     activeEffect = effectFn;
+//     effectStack.push(effectFn); // 入栈
+
+//     fn(); //执行
+//     effectStack.pop(); //执行完毕出栈
+//     activeEffect = effectStack[effectStack.length - 1];
+//   };
+//   effectFn.deps = [];
+//   effectFn.options = options;
+//   effectFn();
+// }
+
+// function track(target, key) {
+//   if (!activeEffect) return target[key];
+//   // 根据target,从桶里取得depsMap,它也是Map类型：key-> effects<Set>
+//   let depsMap = bucket.get(target);
+
+//   if (!depsMap) {
+//     bucket.set(target, (depsMap = new Map()));
+//   }
+
+//   let deps = depsMap.get(key);
+
+//   if (!deps) {
+//     depsMap.set(key, (deps = new Set()));
+//   }
+//   deps.add(activeEffect);
+
+//   activeEffect.deps.push(deps);
+// }
+
+// function trigger(target, key) {
+//   const depsMap = bucket.get(target);
+
+//   if (!depsMap) return;
+
+//   const deps = depsMap.get(key);
+//   const effects = new Set(deps);
+
+//   if (effects) {
+//     effects.forEach((fn) => {
+//       if (fn !== activeEffect) {
+//         if(fn.options.scheduler){
+//           fn.options.scheduler(fn); // 把函数返回给调度器
+//         }else{
+//           fn();
+//         }
+//       }
+//     });
+//   }
+// }
+
+// function cleanup(effectFn) {
+//   for (let i = 0; i < effectFn.deps.length; i++) {
+//     const deps = effectFn.deps[i];
+//     deps.delete(effectFn);
+//   }
+
+//   effectFn.deps.length;
+// }
+
+// const obj = new Proxy(data, {
+//   get(target, key) {
+//     track(target, key);
+//     return target[key];
+//   },
+//   set(target, key, val) {
+//     target[key] = val;
+//     trigger(target, key);
+//   },
+// });
+
+// effect(() => {
+//   console.log(obj.foo)
+// }, {
+//   scheduler: (fn) => {
+//     setTimeout(fn)
+//   }
+// })
+// obj.foo++;
+// console.log('结束了')
+
+// 第八版: 实现调度顺序
+// let activeEffect;
+
+// const effectStack = [];
+// const bucket = new WeakMap();
+
+// const data = {
+//   text: 'hello world',
+//   ok: true,
+//   text1: 1,
+//   text2: 2,
+//   num: 1,
+//   foo: 1,
+// };
+
+// function effect(fn, options) {
+//   const effectFn = () => {
+//     cleanup(effectFn);
+//     activeEffect = effectFn;
+//     effectStack.push(effectFn); // 入栈
+
+//     fn(); //执行
+//     effectStack.pop(); //执行完毕出栈
+//     activeEffect = effectStack[effectStack.length - 1];
+//   };
+//   effectFn.deps = [];
+//   effectFn.options = options;
+//   effectFn();
+// }
+
+// function track(target, key) {
+//   if (!activeEffect) return target[key];
+//   // 根据target,从桶里取得depsMap,它也是Map类型：key-> effects<Set>
+//   let depsMap = bucket.get(target);
+
+//   if (!depsMap) {
+//     bucket.set(target, (depsMap = new Map()));
+//   }
+
+//   let deps = depsMap.get(key);
+
+//   if (!deps) {
+//     depsMap.set(key, (deps = new Set()));
+//   }
+//   deps.add(activeEffect);
+
+//   activeEffect.deps.push(deps);
+// }
+
+// function trigger(target, key) {
+//   const depsMap = bucket.get(target);
+
+//   if (!depsMap) return;
+
+//   const deps = depsMap.get(key);
+//   const effects = new Set(deps);
+
+//   if (effects) {
+//     effects.forEach((fn) => {
+//       if (fn !== activeEffect) {
+//         if (fn.options.scheduler) {
+//           fn.options.scheduler(fn); // 把函数返回给调度器
+//         } else {
+//           fn();
+//         }
+//       }
+//     });
+//   }
+// }
+
+// function cleanup(effectFn) {
+//   for (let i = 0; i < effectFn.deps.length; i++) {
+//     const deps = effectFn.deps[i];
+//     deps.delete(effectFn);
+//   }
+
+//   effectFn.deps.length;
+// }
+
+// const obj = new Proxy(data, {
+//   get(target, key) {
+//     track(target, key);
+//     return target[key];
+//   },
+//   set(target, key, val) {
+//     target[key] = val;
+//     trigger(target, key);
+//   },
+// });
+// const jobQueue = new Set();
+
+// const p = Promise.resolve();
+
+// let isFlushing = false;
+// function flushJob() {
+//   if (isFlushing) return;
+
+//   isFlushing = true;
+
+//   p.then(() => {
+//     jobQueue.forEach((fn) => fn());
+//   }).finally(() => {
+//     isFlushing = false;
+//   });
+// }
+
+// effect(
+//   () => {
+//     console.log(obj.foo);
+//   },
+//   {
+//     scheduler: (fn) => {
+//       jobQueue.add(fn);
+//       flushJob();
+//     },
+//   }
+// );
+// obj.foo++;
+// obj.foo++;
+
+// 第九版：增加计算属性
 let activeEffect;
 
 const effectStack = [];
@@ -339,25 +651,31 @@ const data = {
   text1: 1,
   text2: 2,
   num: 1,
-  foo:1
+  foo: 1,
 };
 
-function effect(fn) {
+function effect(fn, options) {
   const effectFn = () => {
     cleanup(effectFn);
     activeEffect = effectFn;
     effectStack.push(effectFn); // 入栈
 
-    fn(); //执行
+    const res = fn(); //执行
     effectStack.pop(); //执行完毕出栈
     activeEffect = effectStack[effectStack.length - 1];
+    return res;
   };
   effectFn.deps = [];
-  effectFn();
+  effectFn.options = options;
+  if (!options.lazy) {
+    effectFn();
+  }
+
+  return effectFn;
 }
 
 function track(target, key) {
-  if (!activeEffect) return target[key];
+  if (!activeEffect) return ;
   // 根据target,从桶里取得depsMap,它也是Map类型：key-> effects<Set>
   let depsMap = bucket.get(target);
 
@@ -381,11 +699,18 @@ function trigger(target, key) {
   if (!depsMap) return;
 
   const deps = depsMap.get(key);
-  const effects = new Set(deps);
+  const effects = new Set();
+  deps.forEach((fn) => {
+    if (fn !== activeEffect) {
+      effects.add(fn);
+    }
+  });
 
   if (effects) {
     effects.forEach((fn) => {
-      if (fn !== activeEffect) {
+      if (fn.options.scheduler) {
+        fn.options.scheduler(fn); // 把函数返回给调度器
+      } else {
         fn();
       }
     });
@@ -411,13 +736,64 @@ const obj = new Proxy(data, {
     trigger(target, key);
   },
 });
+const jobQueue = new Set();
 
-let temp1, temp2;
-effect(function effect1 () {
-  console.log('副作用函数1执行了');
- obj.num++;
-});
+const p = Promise.resolve();
 
+let isFlushing = false;
+function flushJob() {
+  if (isFlushing) return;
 
+  isFlushing = true;
 
-// 缺陷：如果obj.num++场景会导致栈溢出
+  p.then(() => {
+    jobQueue.forEach((fn) => fn());
+  }).finally(() => {
+    isFlushing = false;
+  });
+}
+
+// effect(
+//   () => {
+//     console.log(obj.foo);
+//   },
+//   {
+//     lazy:true,
+//     scheduler: (fn) => {
+//       jobQueue.add(fn);
+//       flushJob();
+//     },
+//   }
+// );
+
+function computed(getterFn) {
+  let value; // 上一次缓存的值
+  let dirty = true; //数据脏了需要重新计算
+  const effectFn = effect(getterFn, {
+    lazy: true,
+    scheduler() {
+      if (!dirty) {
+        dirty = true;
+        trigger(obj, 'value');
+      }
+    },
+  });
+  const obj = {
+    get value() {
+      if (dirty) {
+        value = effectFn();
+        dirty = false;
+      }
+      track(obj, 'value');
+      return value;
+    },
+  };
+  return obj;
+}
+
+const sum = computed(() => obj.foo + obj.text1);
+console.log('sum', sum.value);
+
+obj.foo++;
+
+console.log('sum', sum.value);
