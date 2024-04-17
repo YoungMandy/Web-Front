@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES2022",
+    "strictNullChecks": true,// 不允许将undefined和null 赋值给其他类型
+    "noImplicitAny": true,// 不允许隐式的类型转换
+  }
+}
