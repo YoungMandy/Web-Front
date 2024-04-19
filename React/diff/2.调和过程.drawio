@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="a81SSqb06tftvyrKIBqq" name="第 1 页">
-        <mxGraphModel dx="1103" dy="760" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="553" dy="456" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -26,6 +26,9 @@
                 </mxCell>
                 <mxCell id="52" value="D组件重新执行渲染函数，得到新的Element" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="475" y="260" width="210" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="61" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="57" target="60">
+                    <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="57" value="新生成的Element 与 oldFiber进行diff得到新的Fiber树" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="470" y="380" width="215" height="60" as="geometry"/>
@@ -116,6 +119,9 @@
                         <mxPoint x="323.6811764705883" y="123.14666666666663" as="sourcePoint"/>
                         <mxPoint x="290" y="160" as="targetPoint"/>
                     </mxGeometry>
+                </mxCell>
+                <mxCell id="60" value="diff后得到的新Fiber树会把每个待更新的Fiber都打上tag" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="450" y="490" width="260" height="70" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
