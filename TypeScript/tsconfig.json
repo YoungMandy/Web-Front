@@ -4,5 +4,21 @@
     "target": "ES2022",
     "strictNullChecks": true,// 不允许将undefined和null 赋值给其他类型
     "noImplicitAny": true,// 不允许隐式的类型转换
+    "esModuleInterop":true,
+
+    // "target": "esnext",
+    // "module": "esnext",
+    // "strict": true,
+    // "jsx": "react",
+    // "importHelpers": true,
+    // "moduleResolution": "node",
+    // "experimentalDecorators": true,
+    // "skipLibCheck": true,
+    // "esModuleInterop": true,
+    // "allowSyntheticDefaultImports": true,
+    // "sourceMap": true,
+    // "allowJs": true,
+    // "baseUrl": ".",
+    // "noImplicitAny": false,
   }
 }

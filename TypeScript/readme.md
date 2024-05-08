@@ -78,3 +78,6 @@ f2(undefined);
 TypeScript中只存在一种尾端类型，即never类型。
 
 
+在vscode中编译ts文件的快捷键是shift + cmd + B
+
+

@@ -62,11 +62,31 @@
 
 // 4.构造函数调用
 
-function foo () {
+// function foo () {
+// }
+
+// foo.prototype.name = 'hello world';
+
+// let b = new foo();
+// console.log(b.name);// hello world
+
+
+
+debugger
+var a = 1;
+debugger
+this.b = 3;
+let c = 4;
+function fun () {
+  debugger
+ 
+  this.a = 2;
+  console.log('函数内的this:', this);
+  console.log(this.a)
 }
 
-foo.prototype.name = 'hello world';
-
-let b = new foo();
-console.log(b.name);// hello world
-
+fun();
+debugger
+console.log('函数外的this.a:', this.a);
+console.log('函数外的this:',this)
+console.log(a);
