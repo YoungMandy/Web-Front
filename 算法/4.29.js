@@ -16,4 +16,7 @@ function sum (min, max) {
   return s;
 }
 
-console.log(sum(1, 100));
+// console.log(sum(1, 100));
+
+console.log(Math.trunc(10.123456789))// 去掉小数部分
+console.log(Math.sign(10.8))
