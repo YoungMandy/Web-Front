@@ -6,7 +6,13 @@ Function.prototype.bind1 = function(bindObj) {
     return self.apply(bindObj, args.concat(rest));
   }
 }
-
+Function.prototype.bind8 = function(bindObj) {
+  let self = this;
+  let args = [...arguments].slice(1);// 取1及后面的数
+  return function(...rest) {
+    return self.apply(bindObj,args.concat(rest))
+  }
+}
 // ----------------------------------------------------------------
 // 当前版本可以优化的地方：bind返回的函数可以作为构造函数调用，new 构造返回的对象的this默认指向的是构造函数的prototype
 
@@ -29,7 +35,26 @@ Function.prototype.bind3 = function(context, ...rest) {
   const fFound = function(...args) {
     return self.apply(this instanceof fFound? this: context,rest.concat(args));
   }
-  Object.setPrototypeOf(fFound.prototype, this.prototype);
+  Object.setPrototypeOf(fFound, this.prototype);
+  return fFound;
+}
+
+Function.prototype.bind4 = function(context,...rest) {
+  let self = this;
+  const fFound = function(...args) {
+    return self.apply(this instanceof fFound? this:context,rest.concat(args));
+  }
+  Object.setPrototypeOf(fFound, this.prototype);
+  return fFound;
+}
+
+Function.prototype.bind5 = function(context, ...rest) {
+  const self = this;
+  const fFound = function(...args) {
+    let obj = this instanceof fFound ? this : context;
+    return self.apply(obj,rest.concat(args));
+  }
+  Object.setPrototypeOf(fFound, this.prototype);
   return fFound;
 }
 
