@@ -1,0 +1,91 @@
+<mxfile host="65bd71144e">
+    <diagram id="TUBE9LNubIQy5jUnSFzf" name="第 1 页">
+        <mxGraphModel dx="801" dy="455" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#ffffff" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="客户端" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="50" y="87" width="110" height="43" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;strokeWidth=3;strokeColor=#000000;fontSize=16;" parent="1" source="2" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="460" y="247" as="sourcePoint"/>
+                        <mxPoint x="800" y="107" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="5" value="构建请求" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;fontColor=#000000;strokeColor=#333333;fontSize=13;" parent="1" vertex="1">
+                    <mxGeometry x="170" y="77" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="通过DNS查询IP地址" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;fontColor=#000000;strokeColor=#333333;fontSize=13;" parent="1" vertex="1">
+                    <mxGeometry x="250" y="67" width="70" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="&lt;font color=&quot;#ff0000&quot;&gt;三次握手&lt;/font&gt;建立TCP连接" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;fontColor=#000000;strokeColor=#333333;fontSize=13;" parent="1" vertex="1">
+                    <mxGeometry x="340" y="67" width="70" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="客户端发起请求" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;fontColor=#000000;strokeColor=#333333;fontSize=13;" parent="1" vertex="1">
+                    <mxGeometry x="430" y="67" width="80" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="服务器响应" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;fontColor=#000000;strokeColor=#333333;fontSize=13;" parent="1" vertex="1">
+                    <mxGeometry x="540" y="67" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="&lt;font color=&quot;#ff0000&quot;&gt;四次挥手&lt;/font&gt;断开TCP连接" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;fontColor=#000000;strokeColor=#333333;fontSize=13;" parent="1" vertex="1">
+                    <mxGeometry x="680" y="67" width="80" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="服务器" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="50" y="203" width="110" height="43" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;strokeWidth=3;strokeColor=#000000;fontSize=16;" parent="1" source="12" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="460" y="364" as="sourcePoint"/>
+                        <mxPoint x="800" y="224" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="17" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;fontSize=13;" parent="1" vertex="1">
+                    <mxGeometry x="340" y="177" width="70" height="47" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="服务器处理数据阶段" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffff88;strokeColor=#36393d;fontColor=#000000;fontSize=13;" parent="1" vertex="1">
+                    <mxGeometry x="410" y="177" width="240" height="47" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;fontSize=13;" parent="1" vertex="1">
+                    <mxGeometry x="650" y="177" width="70" height="47" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="" style="endArrow=classic;html=1;strokeColor=#999999;strokeWidth=2;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" target="18">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="440" y="110" as="sourcePoint"/>
+                        <mxPoint x="460" y="170" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="26" value="请求行" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=none;fontColor=#000000;fontSize=14;" connectable="0" vertex="1" parent="25">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="" style="endArrow=classic;html=1;strokeColor=#999999;strokeWidth=2;fontSize=14;fontColor=#000000;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="8" target="18">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="480" y="130" as="sourcePoint"/>
+                        <mxPoint x="483" y="170" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="32" value="请求头" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=none;fontSize=14;fontColor=#000000;" connectable="0" vertex="1" parent="31">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="33" value="" style="endArrow=classic;html=1;strokeColor=#999999;strokeWidth=2;fontSize=14;fontColor=#000000;exitX=0.622;exitY=-0.009;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="18">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="400" y="210" as="sourcePoint"/>
+                        <mxPoint x="580" y="110" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="34" value="响应头" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=none;fontSize=14;fontColor=#000000;" connectable="0" vertex="1" parent="33">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="35" value="" style="endArrow=classic;html=1;strokeColor=#999999;strokeWidth=2;fontSize=14;fontColor=#000000;exitX=0.833;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="18">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="552.9834254143648" y="187" as="sourcePoint"/>
+                        <mxPoint x="630" y="110" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="36" value="响应体" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=none;fontSize=14;fontColor=#000000;" connectable="0" vertex="1" parent="35">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

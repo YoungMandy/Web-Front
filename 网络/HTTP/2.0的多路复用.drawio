@@ -1,0 +1,73 @@
+<mxfile host="65bd71144e">
+    <diagram id="ZStL4v_jgnLMQSh89JSY" name="第 1 页">
+        <mxGraphModel dx="959" dy="364" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="浏览器" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=14;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="40" width="120" height="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="服务器" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=14;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" vertex="1" parent="1">
+                    <mxGeometry x="800" y="40" width="120" height="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=13;" vertex="1" parent="1">
+                    <mxGeometry x="200" y="80" width="560" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="stream1&lt;br style=&quot;font-size: 13px;&quot;&gt;HEADER&lt;br style=&quot;font-size: 13px;&quot;&gt;index.html" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=13;" vertex="1" parent="1">
+                    <mxGeometry x="650" y="90" width="90" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="stream2&lt;br style=&quot;font-size: 13px;&quot;&gt;HEADER&lt;br style=&quot;font-size: 13px;&quot;&gt;foo.css" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=13;" vertex="1" parent="1">
+                    <mxGeometry x="540" y="90" width="90" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="stream3&lt;br style=&quot;font-size: 13px;&quot;&gt;HEADER&lt;br style=&quot;font-size: 13px;&quot;&gt;bar.js" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=13;" vertex="1" parent="1">
+                    <mxGeometry x="430" y="90" width="90" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="stream4&lt;br style=&quot;font-size: 13px;&quot;&gt;HEADER&lt;br style=&quot;font-size: 13px;&quot;&gt;test.png" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=13;" vertex="1" parent="1">
+                    <mxGeometry x="320" y="90" width="90" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="..." style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=13;" vertex="1" parent="1">
+                    <mxGeometry x="210" y="90" width="90" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="..." style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=13;" vertex="1" parent="1">
+                    <mxGeometry x="650" y="210" width="90" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="stream1&lt;br style=&quot;font-size: 13px;&quot;&gt;HEADER&lt;br style=&quot;font-size: 13px;&quot;&gt;index.html" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=13;" vertex="1" parent="1">
+                    <mxGeometry x="210" y="210" width="90" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="stream1&lt;br style=&quot;font-size: 13px;&quot;&gt;DATA&lt;br style=&quot;font-size: 13px;&quot;&gt;index.html" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=13;" vertex="1" parent="1">
+                    <mxGeometry x="430" y="210" width="90" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="stream3&lt;br style=&quot;font-size: 13px;&quot;&gt;HEADER&lt;br style=&quot;font-size: 13px;&quot;&gt;bar.js" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=13;" vertex="1" parent="1">
+                    <mxGeometry x="320" y="210" width="90" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="stream2&lt;br style=&quot;font-size: 13px;&quot;&gt;HEADER&lt;br style=&quot;font-size: 13px;&quot;&gt;foo.css" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=13;" vertex="1" parent="1">
+                    <mxGeometry x="540" y="210" width="90" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="" style="endArrow=classic;html=1;entryX=0;entryY=0.2;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;fontSize=14;" edge="1" parent="1" target="4">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="160" y="120" as="sourcePoint"/>
+                        <mxPoint x="210" y="70" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="19" value="" style="endArrow=classic;html=1;entryX=-0.012;entryY=0.214;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;fontSize=14;" edge="1" parent="1" target="3">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="760" y="100" as="sourcePoint"/>
+                        <mxPoint x="810" y="50" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="20" value="" style="endArrow=classic;html=1;exitX=-0.004;exitY=0.714;exitDx=0;exitDy=0;exitPerimeter=0;strokeWidth=2;fontSize=14;" edge="1" parent="1" source="3">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="710" y="290" as="sourcePoint"/>
+                        <mxPoint x="760" y="240" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="21" value="" style="endArrow=classic;html=1;exitX=0.001;exitY=0.8;exitDx=0;exitDy=0;exitPerimeter=0;strokeWidth=2;fontSize=14;" edge="1" parent="1" source="4">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="110" y="290" as="sourcePoint"/>
+                        <mxPoint x="160" y="240" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
