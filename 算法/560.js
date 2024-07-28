@@ -1,19 +1,40 @@
-function foo() {
-  var a = 1;
-  var b = { name: '极客邦' ,num:1};
-  function showName () {
-    debugger
-    var c = 2;
-    var d = { name: '极客时间' };
+var subarraySum = function(nums, k) {
+  const n = nums.length;
+  let res = 0;
+  const map = {};
 
-    console.log('a', a);
-    console.log('b', b);
+  function dfs (i, sum) {
+    debugger
+    const key = `${i}-${sum}`;
+    if (map[key] !== undefined) { return };
+
+    if (i > 0 && sum == k) {
+      res += 1;
+      return;
+    }
+
+    if (i == n) {
+      return
+    }
+
+
+    const x = nums[i];
+
+    // 选
+    dfs(i + 1, sum + x);
+
+
+    // 不接
+    dfs(i + 1, 0);
+    map[key] = 1;
+
   }
-  b.showName = showName;
-  return b;
-}
-const b = foo();
-b.num++;
-debugger
-console.log('b7777',b);
-b.showName();
+
+  dfs(0, 0);
+  console.log(res);
+
+  return res;
+
+};
+
+subarraySum([1], 0)
