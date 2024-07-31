@@ -2,29 +2,28 @@
 
 class Scheduler {
 
-  constructor (x, y) {
-    this.max = 2;
-    this.count = 0;
-    this.queue = [];
-  }
+  max = 2;
+  count = 0;
+  queue = [];
 
-   async add (promiseCreator) {
-       this.count++;
-       if (this.count > this.max) {
-         await new Promise(resolve => {
-           this.queue.push(resolve)
-         })
-       }
 
-     return promiseCreator().finally(res => {
-         this.count--;
-         if (this.queue.length) {
-           const resolve = this.queue.shift();
-           resolve();
-         }
-         return res;
-       })
-     
+  async add (promiseCreator) {
+    this.count++;
+    if (this.count > this.max) {
+      await new Promise(resolve => {
+        this.queue.push(resolve)
+      })
+    }
+
+    return promiseCreator().finally(res => {
+      this.count--;
+      if (this.queue.length) {
+        const resolve = this.queue.shift();
+        resolve();
+      }
+      return res;
+    })
+
   }
 
 }
