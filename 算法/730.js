@@ -9,7 +9,6 @@ class MyObject {
 
   wait (gap) {
     // 这里使用setTimeout来模拟等待
-
     this.gap = gap;
     this.immediate = true;
     return this;
