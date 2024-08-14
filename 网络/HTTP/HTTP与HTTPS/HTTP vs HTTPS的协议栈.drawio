@@ -1,0 +1,61 @@
+<mxfile host="65bd71144e">
+    <diagram id="CbMJjx6d-uiiHI6VFoXi" name="第 1 页">
+        <mxGraphModel dx="789" dy="604" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#ffffff" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="HTTP （应用层）" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;fontSize=12;" vertex="1" parent="1">
+                    <mxGeometry x="150" y="40" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="TCP (网络层)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;fontSize=12;" vertex="1" parent="1">
+                    <mxGeometry x="150" y="90" width="120" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="IP (传输层)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;fontSize=12;" vertex="1" parent="1">
+                    <mxGeometry x="150" y="150" width="120" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="数据链路层" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;fontSize=12;" vertex="1" parent="1">
+                    <mxGeometry x="150" y="210" width="120" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="HTTP （应用层）" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;fontSize=12;" vertex="1" parent="1">
+                    <mxGeometry x="360" y="40" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="SSL/TLS （安全层）" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e51400;fontColor=#ffffff;strokeColor=#B20000;fontSize=12;" vertex="1" parent="1">
+                    <mxGeometry x="360" y="90" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="TCP (网络层)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;fontSize=12;" vertex="1" parent="1">
+                    <mxGeometry x="360" y="140" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="IP (传输层)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;fontSize=12;" vertex="1" parent="1">
+                    <mxGeometry x="360" y="180" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="数据链路层" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;fontSize=12;" vertex="1" parent="1">
+                    <mxGeometry x="360" y="220" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="" style="endArrow=classic;html=1;strokeColor=#CC0000;fontSize=12;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="350" y="50" as="sourcePoint"/>
+                        <mxPoint x="350" y="130" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="12" value="加密" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#CC0000;fontSize=12;" vertex="1" parent="1">
+                    <mxGeometry x="300" y="80" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="" style="endArrow=classic;html=1;strokeColor=#CC0000;fontColor=#CC0000;fontSize=12;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="490" y="130" as="sourcePoint"/>
+                        <mxPoint x="490" y="50" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="14" value="解密" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#CC0000;fontSize=12;" vertex="1" parent="1">
+                    <mxGeometry x="480" y="80" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="HTTP" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=12;" vertex="1" parent="1">
+                    <mxGeometry x="170" y="270" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="HTTP&lt;font color=&quot;#cc0000&quot; style=&quot;font-size: 12px;&quot;&gt;S&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=12;" vertex="1" parent="1">
+                    <mxGeometry x="400" y="270" width="60" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
