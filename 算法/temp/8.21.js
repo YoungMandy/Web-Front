@@ -12,15 +12,14 @@ function throttle (fn, gap) {
   }
 }
 
-let num = 0;
-function test (num) {
 
+function test (num) {
   console.log(num);
 }
 
 const a = throttle(test, 100);
-
 a(1);
+
 setTimeout(() => a(2), 50)
 setTimeout(() => a(3), 100)
 setTimeout(() => a(4), 100)
