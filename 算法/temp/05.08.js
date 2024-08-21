@@ -1,9 +1,5 @@
-/*
- * @desc: 
- * @param: 
- * @return: 
- * @Author: huili.local
- */
+
+// 格式化输出
 // 1000.32 => 1,000.32
 // 100.5 => 100.5
 function formatPrice (price) {

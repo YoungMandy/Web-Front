@@ -1,5 +1,6 @@
 
 
+// 并发控制器
 class Scheduler {
 
   max = 2;
