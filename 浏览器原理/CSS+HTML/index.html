@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      .up {
+        position: relative;
+        background-color: skyblue;
+        height: 200px;
+        margin-bottom: 40px;
+      }
+
+      .B {
+        top: 20px;
+        width: 100px;
+        height: 100px;
+        background-color: aqua;
+        position: absolute;
+      }
+
+      .C {
+        z-index: 1;
+        top: 50px;
+        width: 100px;
+        height: 100px;
+        background-color: yellow;
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="up">
+      A
+
+      <div class="C">c</div>
+
+      <div class="B">B</div>
+    </div>
+  </body>
+</html>
