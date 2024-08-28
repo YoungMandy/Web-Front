@@ -4,7 +4,7 @@
 function ajaxControl (cb) {
   debugger
   let cleanup;
-  
+
   function onInvalidate (fn) {
     cleanup = fn;
   }
@@ -23,9 +23,9 @@ async function ajax (onInvalidate) {
   let expired = false;
 
   onInvalidate(() => expired = true);
-debugger
-  await Promise.resolve().then(()=> setTimeout(()=> console.log('timeout')));
-debugger
+  debugger
+  await Promise.resolve().then(() => setTimeout(() => console.log('timeout')));
+  debugger
   console.log('expired', expired);
 }
 
