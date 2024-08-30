@@ -90,6 +90,11 @@ console.log(2);
 // 100 剩余：00:01:39
 // 100 剩余：00:01:38
 // ...
+  
+  
+  // while (true) {
+  //   console.log(new Date().toISOString());
+  // }
 
 
 
