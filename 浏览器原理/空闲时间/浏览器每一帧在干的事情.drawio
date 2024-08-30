@@ -1,0 +1,28 @@
+<mxfile host="65bd71144e">
+    <diagram id="49_K_hT6ojhSTBMTKSl4" name="第 1 页">
+        <mxGraphModel dx="633" dy="421" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#ffffff" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="处理用户输入" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;fontSize=16;align=center;flipH=1;" parent="1" vertex="1">
+                    <mxGeometry x="210" y="30" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="执行JavaScript" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;fontSize=16;align=center;flipH=1;" parent="1" vertex="1">
+                    <mxGeometry x="210" y="120" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="样式计算" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;fontSize=16;align=center;flipH=1;" parent="1" vertex="1">
+                    <mxGeometry x="210" y="220" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="布局" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;fontSize=16;align=center;flipH=1;" parent="1" vertex="1">
+                    <mxGeometry x="210" y="310" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="绘制" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;fontSize=16;align=center;flipH=1;" parent="1" vertex="1">
+                    <mxGeometry x="210" y="400" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="合成" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;fontSize=16;align=center;flipH=1;" parent="1" vertex="1">
+                    <mxGeometry x="210" y="490" width="120" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
