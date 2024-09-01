@@ -5,16 +5,16 @@
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
                 <mxCell id="27" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#3700CC;fontSize=16;fontColor=#ffffff;fillColor=#6a00ff;opacity=15;shadow=1;" parent="1" vertex="1">
-                    <mxGeometry x="10" y="360" width="580" height="50" as="geometry"/>
+                    <mxGeometry x="10" y="360" width="670" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="26" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#C73500;fontSize=16;fontColor=#000000;fillColor=#fa6800;opacity=15;shadow=1;" parent="1" vertex="1">
-                    <mxGeometry x="10" y="255" width="580" height="50" as="geometry"/>
+                    <mxGeometry x="10" y="255" width="670" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="24" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#006EAF;fontSize=16;fontColor=#ffffff;fillColor=#1ba1e2;opacity=15;shadow=1;" parent="1" vertex="1">
-                    <mxGeometry x="10" y="40" width="580" height="50" as="geometry"/>
+                    <mxGeometry x="10" y="40" width="670" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="25" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#005700;fontSize=16;fontColor=#ffffff;fillColor=#008a00;opacity=15;shadow=1;" parent="1" vertex="1">
-                    <mxGeometry x="10" y="145" width="580" height="50" as="geometry"/>
+                    <mxGeometry x="10" y="145" width="670" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="2" value="develop 分支" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=16;" parent="1" vertex="1">
                     <mxGeometry x="10" y="50" width="120" height="30" as="geometry"/>
@@ -73,8 +73,8 @@
                         <mxPoint x="350" y="180" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="19" value="发布" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#000000;" parent="1" vertex="1">
-                    <mxGeometry x="490" y="305" width="100" height="25" as="geometry"/>
+                <mxCell id="19" value="发布线上" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="500" y="320" width="100" height="25" as="geometry"/>
                 </mxCell>
                 <mxCell id="20" value="打tag" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#000000;" parent="1" vertex="1">
                     <mxGeometry x="510" y="373.5" width="100" height="25" as="geometry"/>
@@ -88,8 +88,11 @@
                         <mxPoint x="350" y="180" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="23" value="发布内容合入&lt;br style=&quot;font-size: 14px;&quot;&gt;下一个开发版本" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#000000;" parent="1" vertex="1">
-                    <mxGeometry x="450" y="110" width="240" height="25" as="geometry"/>
+                <mxCell id="23" value="发布内容合入下一个&lt;br&gt;开发版本" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="470" y="110" width="240" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" value="进行最后的测试和修复" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
+                    <mxGeometry x="529.5" y="270.5" width="150" height="34.5" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

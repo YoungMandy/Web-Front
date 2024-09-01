@@ -7,7 +7,7 @@
                 <mxCell id="27" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#3700CC;fontSize=16;fontColor=#ffffff;fillColor=#6a00ff;opacity=15;shadow=1;" parent="1" vertex="1">
                     <mxGeometry x="10" y="-120" width="470" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="26" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#C73500;fontSize=16;fontColor=#000000;fillColor=#fa6800;opacity=15;shadow=1;" parent="1" vertex="1">
+                <mxCell id="26" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#005700;fontSize=16;fontColor=#ffffff;fillColor=#008a00;opacity=15;shadow=1;" parent="1" vertex="1">
                     <mxGeometry x="10" y="100" width="470" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="24" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#006EAF;fontSize=16;fontColor=#ffffff;fillColor=#1ba1e2;opacity=15;shadow=1;" parent="1" vertex="1">
@@ -22,10 +22,10 @@
                 <mxCell id="7" value="bug修复" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#000000;" parent="1" vertex="1">
                     <mxGeometry x="110" y="-60" width="100" height="25" as="geometry"/>
                 </mxCell>
-                <mxCell id="12" value="release 分支" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=16;" parent="1" vertex="1">
+                <mxCell id="12" value="develop分支" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=16;" parent="1" vertex="1">
                     <mxGeometry x="10" y="107.5" width="120" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="13" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontColor=#000000;fillColor=#fa6800;strokeColor=#C73500;" parent="1" vertex="1">
+                <mxCell id="13" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontColor=#ffffff;fillColor=#60a917;strokeColor=#2D7600;" parent="1" vertex="1">
                     <mxGeometry x="330" y="105" width="35" height="35" as="geometry"/>
                 </mxCell>
                 <mxCell id="16" value="master 分支" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=16;" parent="1" vertex="1">
@@ -58,11 +58,14 @@
                         <mxPoint x="350" y="-10" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="32" value="修复完成" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#000000;" parent="1" vertex="1">
-                    <mxGeometry x="280.5" y="-50" width="100" height="25" as="geometry"/>
+                <mxCell id="32" value="修复完成" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="270" width="100" height="25" as="geometry"/>
                 </mxCell>
-                <mxCell id="33" value="修复完成" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#000000;" parent="1" vertex="1">
-                    <mxGeometry x="297.5" y="60" width="100" height="25" as="geometry"/>
+                <mxCell id="33" value="部署上线" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="297.5" y="-60" width="100" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="34" value="合并入下一个开发版本" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#000000;" vertex="1" parent="1">
+                    <mxGeometry x="310" y="60" width="176" height="30" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
