@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        box-sizing: content-box;
+      
+      }
+      /* 滚动盒子 */
+      .scroll-box {
+        height: 150px;
+        overflow: auto;
+        padding: 20px;
+        margin: 8px;
+        border: 10px solid rgb(56, 18, 179);
+      }
+
+      .scroll-item {
+        width: 600px;
+        height: 200px;
+        padding: 10px;
+        border: 5px solid purple;
+        background-color: skyblue;
+      }
+
+      /* 浮动盒子 */
+      .float-box {
+        margin: 8px;
+        margin-top:20px;
+        height: 150px;
+        padding: 20px;
+        border: 10px solid palegreen;
+      }
+      .float-item {
+        width: 100px;
+        height: 100px;
+        padding:5px;
+        border:6px solid purple;
+        float: left;
+        background-color: rgb(63, 224, 224);
+      }
+
+      /* 绝对定位 */
+    .relative-box{
+      position:relative;
+      margin: 8px;
+      margin-top:20px;
+      height:150px;
+      padding:20px;
+      border: 10px solid purple;
+    }
+
+    .absolute-item{
+      position:relative;
+      margin-top:20px;
+      width:50%;
+      height:50%;
+      padding:10px;
+      border: 5px solid skyblue;
+    }
+
+    .flex-box{
+      display: flex;
+      margin: 8px;
+      margin-top:20px;
+      height:150px;
+      padding:20px;
+      border:10px solid orange;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .flex-item{
+      width:100px;
+      height:100px;
+      padding:10px;
+      border:5px solid seagreen;
+    }
+
+    </style>
+  </head>
+  <body>
+    <div class="scroll-box" id="scroll-parent"  onclick="computedStyle('scroll-parent','滚动布局的父元素')">
+      <div class="scroll-item" id="scroll-child" onclick="computedStyle('scroll-child','滚动布局的子元素',event)">滚动布局</div>
+    </div>
+
+    <div class="float-box" id="float-parent" onclick="computedStyle('float-parent','浮动布局的父元素')">
+      <div class="float-item" id="float-child" onclick="computedStyle('float-child','浮动布局的子元素',event)">浮动元素</div>
+    </div>
+
+    <div class="relative-box" id="relative-parent" onclick="computedStyle('relative-parent','绝对定位的父元素')">
+      <div class="absolute-item" id="absolute-child" onclick="computedStyle('absolute-child','绝对定位的子元素',event)">绝对定位</div>
+    </div>
+
+    <div class="flex-box" id="flex-parent" onclick="computedStyle('flex-parent','浮动布局的父元素')">
+      <div class="flex-item" id="flex-child-1" onclick="computedStyle('flex-child-1','flex一号盒子',event)">flex一号盒子</div>
+      <div class="flex-item" id="flex-child-2" onclick="computedStyle('flex-child-2','flex二号盒子',event)">flex二号盒子</div>
+    </div>
+
+
+
+    
+  </body>
+  <script type="text/javascript">
+    // 如果你需要处理多个元素，可以定义一个函数来获取这些属性
+    function getElementProperties(id) {
+      const element = document.getElementById(id);
+      if(!element) {
+        console.log('找不到，id:'+id);
+        return;
+      }
+
+
+      // 获取元素的尺寸和位置
+      const offsetWidth = element.offsetWidth;
+      const offsetHeight = element.offsetHeight;
+      const offsetTop = element.offsetTop;
+      const offsetBottom = element.offsetBottom;
+      const offsetLeft = element.offsetLeft;
+      const offsetRight = element.offsetRight;
+
+      // 获取滚动相关属性
+      const scrollWidth = element.scrollWidth;
+      const scrollHeight = element.scrollHeight;
+      const scrollTop = element.scrollTop;
+      const scrollBottom = element.scrollBottom;
+      const scrollLeft = element.scrollLeft;
+      const scrollRight = element.scrollRight;
+
+      // 获取元素边框和客户区大小
+      const clientTop = element.clientTop;
+      const clientBottom = element.clientBottom;
+      const clientLeft = element.clientLeft;
+      const clientRight = element.clientRight;
+      const clientWidth = element.clientWidth;
+      const clientHeight = element.clientHeight;
+
+      return {
+        // offset: {
+        //   offsetWidth,
+        //   offsetHeight,
+        //   offsetTop,
+        //   offsetBottom,
+        //   offsetLeft,
+        //   offsetRight,
+        // },
+        client: {
+          clientWidth,
+          clientHeight,
+          clientTop,
+          clientBottom,
+          clientLeft,
+          clientRight,
+        },
+        // scroll: {
+        //   scrollWidth,
+        //   scrollHeight,
+        //   scrollTop,
+        //   scrollBottom,
+        //   scrollLeft,
+        //   scrollRight,
+        // },
+        // width: {
+        //   offsetWidth,
+        //   clientWidth,
+        //   scrollWidth,
+        // },
+        // height: {
+        //   offsetHeight,
+        //   clientHeight,
+        //   scrollHeight,
+        // },
+        // top: {
+        //   offsetTop,
+        //   clientTop,
+        //   scrollTop,
+        // },
+        //  bottom:{
+        //   offsetBottom,
+        //   scrollBottom,
+        //   clientBottom
+        // },
+        // left: {
+        //   offsetLeft,
+        //   clientLeft,
+        //   scrollLeft,
+        // },
+        // right: {
+        //   offsetRight,
+        //   clientRight,
+        //   scrollRight,
+        // },
+       
+      };
+    }
+
+    function computedStyle(id,name,event) {
+     
+      // 使用该函数
+      const properties = getElementProperties(id);
+      console.group(name);
+      console.log(properties);
+      console.groupEnd();
+     
+      console.log('\n');
+      
+      if (event) {
+       
+        event.stopPropagation(); // 阻止事件冒泡
+      }
+    }
+  </script>
+</html>
