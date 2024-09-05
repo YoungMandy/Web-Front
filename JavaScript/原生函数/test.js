@@ -109,6 +109,8 @@ console.log(Object.getPrototypeOf(c));// { text: 'd', num: 123 }
 console.log(Object.getPrototypeOf(c) === d);// true
 console.log(Object.getPrototypeOf(d) === Object.prototype);// true
 
+console.log(Object.prototype.toString.call(c))
+
 
 
 const e = { name: 'e' };
