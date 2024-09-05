@@ -46,8 +46,8 @@ function findPath (root, val) {
       return;
     }
 
-    res.length < 1 && dfs(node.left,[...path]);
-    res.length < 1  && dfs(node.right,[...path]);
+    res.length < 1 && dfs(node.left, [...path]);
+    res.length < 1 && dfs(node.right, [...path]);
   }
 
   dfs(root, []);
@@ -64,29 +64,29 @@ findPath(root, 10);
 
 
 function add (...arg) {
-   let args = arg;
+  let args = arg;
 
-  function a (...rest) {
-    
+  function fn (...rest) {
+
     args = [...args, ...rest];
 
-    return a;
+    return fn;
   }
 
 
-  const b = {
-    toString : function() {
 
-      const sum = args.reduce((total, cur) => {
-        return total += cur;
-      }, 0)
+  fn.toString = function() {
 
-      return sum;
-    }
+    const sum = args.reduce((total, cur) => {
+      return total += cur;
+    }, 0)
+
+    return sum;
   }
 
-  Object.setPrototypeOf(a, b);
-
-  return a;
+  return fn;
 }
+const b = add(1)(2)(3);
+console.log(Function.prototype.toString.call(b))
 console.log("sum=" + add(1)(2)(3).toString()); // sum=6
+
