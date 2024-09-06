@@ -62,31 +62,23 @@ findPath(root, 10);
 
 
 
-
 function add (...arg) {
-  let args = arg;
-
-  function fn (...rest) {
-
-    args = [...args, ...rest];
-
-    return fn;
+  let args = arg;// 收集入参
+  const fn = function(...rest) {
+    args = args.concat(rest);
+   
+    return fn;//函数的内部也需要返回函数
   }
-
-
-
   fn.toString = function() {
-
-    const sum = args.reduce((total, cur) => {
-      return total += cur;
-    }, 0)
-
-    return sum;
+    const sum = args.reduce((total, cur) => total + cur, 0);
+   
+    return sum +'';
   }
-
   return fn;
 }
-const b = add(1)(2)(3);
-console.log(Function.prototype.toString.call(b))
-console.log("sum=" + add(1)(2)(3).toString()); // sum=6
+
+
+console.log("sum=" + add(1)); // sum=1
+console.log("sum=" + add(1)(2)); // sum=4
+console.log("sum=" + add(1)(2)(3)); // sum=6
 
