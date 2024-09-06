@@ -79,6 +79,6 @@ function add (...arg) {
 
 
 console.log("sum=" + add(1)); // sum=1
-console.log("sum=" + add(1)(2)); // sum=4
+console.log("sum=" + add(1)(2)); // sum=3
 console.log("sum=" + add(1)(2)(3)); // sum=6
 

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 不能通过hover去修改其他选择器的样式 */
+    :root{
+       --pcolor: greenyellow; 
+    }
+
+    .parent{
+      height:400px;
+      background-color: var(--pcolor);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .child{
+      width:200px;
+      height:200px;
+      background-color: blueviolet;
+    }
+    .child:hover{
+      .parent{
+        background-color: red;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="parent">
+    <div class="child">
+      我是子元素
+    </div>
+  </div>
+  
+</body>
+</html>
