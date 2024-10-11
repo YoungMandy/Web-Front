@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>使用margin来实现居中</title>
+    <style>
+      .parent {
+        /* position: relative; */
+        height: 400px;
+        width: 400px;
+        background-color: paleturquoise;
+        overflow: hidden;
+
+      }
+      .child {
+        width: 100px;
+        height: 100px;
+        margin: auto;
+        margin-top: calc(50% - 100px / 2);
+        
+        /*        
+        display: inline-block;
+        line-height: 400px; */
+        /* transform: translate(-50%,-50%); */
+        background-color: purple;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="parent">
+      <div class="child">放点东西</div>
+    </div>
+  </body>
+</html>
