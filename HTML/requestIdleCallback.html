@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  研究一下requestIdleCallback
+</body>
+<script>
+  function runTask(tasks){
+    requestIdleCallback((IdleDeadline)=>{
+      while(IdleDeadline.timeRemaining() > 0 && tasks.length > 0){
+        const task = tasks.shift();
+        task();
+      }
+
+      if(tasks.length > 0){
+        runTask(tasks)
+      }
+    })
+  }
+
+
+  function runTask1(tasks){
+    const startTime = performance.now();
+
+    requestAnimationFrame(()=>{
+      while(performance.now() - startTime < 16.6 && tasks.length > 0){
+        const task = tasks.shift();
+        task();
+      }
+
+      if(tasks.length > 0){
+        runTask1(tasks);
+      }
+    })
+  }
+</script>
+
+</html>
