@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  研究一下messageChannel
+</body>
+<script>
+  const channel = new MessageChannel()
+
+// 设置port1的消息接收处理
+channel.port1.onmessage = function (event) {
+  console.log('port1 received:', event.data)
+}
+
+// 设置port2的消息接收处理
+channel.port2.onmessage = function (event) {
+  console.log('port2 received:', event.data)
+}
+
+
+// 发送消息到port2（会被port1接收）
+channel.port1.postMessage('Message to port2 from port1')
+
+// 发送消息到port1（会被port2接收）
+channel.port2.postMessage('Message to port1 from port2')
+
+
+</script>
+</html>
