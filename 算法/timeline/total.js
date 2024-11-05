@@ -589,5 +589,290 @@ function findMaxSum (nums) {
 findMaxSum([-2, 1, -3, 4, -1, 2, 1, -5, 4])
 
 
+// 美团面试题
+//1.js中数组是如何存储的? 链表的区别  
+//2.手写splice方法
+//3.解释作用域 变量作用域 和 this作用域
+//4.下面的代码输出是什么
+var bar = {
+  myName: "meituan1",
+  printName: function() {
+    console.log(myName, this.myName)
+  }
+}
+function foo () {
+  let myName = "meituan2"
+  return bar.printName
+}
+let myName = "meituan3"
+let _printName = foo()
+_printName()
+bar.printName()
+
+//5.es5和es6的继承有什么区别 
+//6.手写eventBus 类，实现监听、释放、触发、删除功能， 监听数大于5个的时候，做释放排队
+//7.性能相关,如果做性能优化，如何通过webpack做优化
+//8.Object中深度搜索是否存在某个值和传入的n（一个字符串）相等，如果有任意字段相等返回true，没有任何匹配则返回false。例如对于传入的对象o， 查找值为“alpha”的值，如果o.sub.param[4] === “alpha” , 则认为可以匹配，返回true
+
+
+// 商汤科技面试题
+// 1.写一个可以控制最大并发请求的异步队列
+// 2. 改写React代码，实现onClick的性能优化，且里面打印的数字是最新值
+import HeavyComponent from './HeavyComponent';
+import { useMemo, useCallback, useRef, useEffect } from 'react';
+
+const PageA = () => {
+  const [value, setValue] = useState('');
+  const curValue = useRef('');
+
+  useEffect(() => {
+    curValue.current = value;
+  }, [value])
+
+  const title = 'Welcome to Page A';
+
+  const onClick = useCallback(
+    () => {
+      console.log('in onClick value is', curValue.current);
+    }, [])
+
+  const HeavyComponentMemo = useMemo(
+    () => <HeavyComponent title={title} onClick={onClick} />,
+    [onClick]
+  )
+
+  return <>
+    <input type='text' value={value} onChange={(e) => setValue(e.target.value)} />
+    {HeavyComponentMemo}
+  </>
+}
+
+// 字节面试题
+// 分析下面的输出结果
+var data = []
+
+for (let i = 0; i < 3; i++) {
+  data[i] = function() {
+    console.log(i)
+  }
+}
+data[0]();
+data[1]();
+data[2]();
+
+class A {
+  constructor () {
+    this.name = 'A';
+  }
+
+  getInfo () {
+    const self = this;
+    return {
+      name: 'B',
+      sayName: function() {
+        console.log(self.name)
+      }
+    }
+  }
+}
+
+const st = new A();
+st.getInfo().sayName();
+
+
+// 字节飞书的面试题
+// 1.写节流函数
+// function throttle (fn, gap) {
+//   let prev = 0;
+//   return function(...rest) {
+
+//     const now = Date.now();
+//     if (now - prev > gap) {
+//       fn.apply(this, rest);
+//       prev = now;
+//     }
+
+//   }
+// }
+
+
+// function test (num) {
+//   console.log(num);
+// }
+
+// const a = throttle(test, 100);
+// a(1);
+
+// setTimeout(() => a(2), 50)
+// setTimeout(() => a(3), 100)
+// setTimeout(() => a(4), 100)
+// setTimeout(() => a(5), 140)
+// setTimeout(() => a(6), 210)
+// setTimeout(() => a(7), 100)
+
+// 并发控制
+function controller (urls, max, callback) {
+  let count = 0;
+  const n = urls.length;
+  const queue = [];
+  const result = new Array(n);
+  debugger
+
+  async function doRequest (url, index) {
+    debugger
+    count++;
+    if (count >= max) {
+      await new Promise((resolve) => queue.push(resolve))
+    }
+    doAction(url).then(res => {
+      result[index] = {
+        status: 'fulfilled',
+        value: res
+      }
+    }).catch(err =>
+      result[index] = {
+        status: 'rejected',
+        reason: err
+      }
+    ).finally(() => {
+      count--;
+      if (queue.length) {
+        const job = queue.shift();
+        job();
+      }
+
+      if (count == 0) {
+        callback(result);
+      }
+    })
+  }
+
+
+  for (let i = 0; i < urls.length; i++) {
+    const url = urls[i];
+    doRequest(url, i);
+  }
+
+}
+
+function doAction (i) {
+  return new Promise((resolve, reject) => {
+    if (Math.random() > 0.5) {
+      setTimeout(() => {
+        console.log(`任务${i}完成`);
+        resolve(i);
+      }, i * 100)
+    } else {
+      console.log(`任务${i}完成`);
+      resolve(i);
+    }
+
+  })
+}
+function print (data) {
+  console.log('end');
+  console.log(data);
+}
+
+function test () {
+  const urls = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  controller(urls, 3, print)
+}
+test();
+
+
+// 判断对象中是否含有指定的目标值
+function valueInObject (obj, s) {
+  if (typeof obj !== 'object' || obj == null) return false;// 非对象
+
+  let res = false;
+  const memo = new Map();
+
+  function dfs (node, value) {
+
+    if (node == null) return;
+    if (res == true) return;
+
+    if (typeof node == 'object' && node !== null) {
+      // for(let key in node){
+      //     dfs(node[key],value)
+      // }
+      if (memo.has(node)) {
+
+        return;
+      } else {
+        memo.set(node, value);
+        const keys = Object.keys(node);
+        const len = keys.length;
+
+        for (let i = 0; i < len && !res; i++) {
+          const key = keys[i];
+          dfs(node[key], value)
+        }
+      }
+
+
+    } else {
+      if (node == value) {
+        res = true;
+      }
+    }
+  }
+
+  dfs(obj, s);
+  return res;
+}
+
+const b = {
+  sub: {
+    params: [0, 1, 2, 3, 6],
+  }
+}
+
+let o = {
+  sub: {
+    params: [0, 1, 2, 3, 'alpha1', 6, b],
+    other: {
+      text: 123,
+      d: [5, 6, b],
+      g: [0, 8, b],
+      'c': 'alpha'
+    },
+  }
+}
+
+console.log(valueInObject(o, 'alpha'))
+// 百度
+//1.寻找最大的公共前缀
+function maxPrefix (arr) {
+  let res = '';
+  if (arr.length < 2) {
+    return res;
+  }
+  const str = arr[0];
+  const comparison = arr.slice(1);
+
+  for (let i = 0; i < str.length; i++) {
+    const matchFlag = comparison.every(
+      item => str.charAt(i) == item.charAt(i)
+    );
+    if (matchFlag) {
+      res += str.charAt(i);
+    } else {
+      return res;
+    }
+  }
+  return res;
+
+  // 补全此处代码
+}
+
+console.log(maxPrefix(['flower', 'flow', 'flight'])); // 'fl'
+// 输入不存在公共前缀
+console.log(maxPrefix(['dog', 'racecar', 'car'])); // ""
+
+
+
+
 
 
