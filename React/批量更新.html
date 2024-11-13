@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>批量更新的方案</title>
+  </head>
+  <body>
+    <button onclick="handleClick()">点击</button>
+  </body>
+  <script type="text/javascript">
+    let batchEventUpdate = false;
+    let callbackQueue = [];
+
+    function flushSyncCallbackQueue() {
+      console.log('-------执行批量更新--------');
+      while (callbackQueue.length > 0) {
+        const cur = callbackQueue.shift();
+        cur();
+      }
+      console.log('-------批量更新结束--------');
+    }
+
+    function wrapEvent(fn) {
+      return function () {
+        //开启批量更新状态
+        batchEventUpdate = true;
+        fn();
+        // 立即执行更新任务
+        flushSyncCallbackQueue();
+
+        //关闭批量更新状态
+        batchEventUpdateEvent = false;
+      };
+    }
+
+    function setState(fn) {
+      // 如果在批量更新状态下，那么批量更新
+      if (batchEventUpdate) {
+        callbackQueue.push(fn);
+      } else {
+        fn();
+      }
+    }
+
+    function handleClick() {
+      setState(() => {
+        console.log('----更新1-----');
+      });
+
+      console.log('上下文执行');
+      setState(() => {
+        console.log('---更新2---');
+      });
+    }
+
+    // 让handleClick变成可控的
+    handleClick = wrapEvent(handleClick);
+  </script>
+</html>
