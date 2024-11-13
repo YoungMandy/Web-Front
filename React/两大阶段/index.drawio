@@ -1,14 +1,14 @@
 <mxfile host="65bd71144e">
     <diagram id="uytvR8A5MepzaFtP78YG" name="第 1 页">
-        <mxGraphModel dx="662" dy="456" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="555" dy="469" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="2" value="&lt;h1&gt;1.渲染阶段&lt;/h1&gt;&lt;p&gt;找到那些元素要更新，找到了更新的元素，更新元素的状态&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+                <mxCell id="2" value="&lt;h1&gt;1.渲染阶段&lt;/h1&gt;&lt;p&gt;找到哪些元素要更新&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
                     <mxGeometry x="50" y="50" width="190" height="120" as="geometry"/>
                 </mxCell>
-                <mxCell id="3" value="&lt;h1&gt;1.渲染阶段&lt;/h1&gt;&lt;p&gt;找到那些元素要更新，找到了更新的元素，更新元素的状态&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
-                    <mxGeometry x="50" y="250" width="190" height="120" as="geometry"/>
+                <mxCell id="3" value="&lt;h1&gt;2.commit阶段&lt;/h1&gt;&lt;p&gt;找到了更新的元素，更新元素的状态&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="50" y="250" width="240" height="110" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
